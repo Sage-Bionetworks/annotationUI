@@ -24,12 +24,54 @@ server <- function(input, output, session) {
     # Use fread function to catch user defined formats, handle large files, and execute correct errors as needed
     user.dat <-  fread(inFile$datapath, encoding = "UTF-8", fill = TRUE, blank.lines.skip = TRUE, na.strings = c("",NA,"NULL") , data.table = FALSE)
     
-    # remove empty rows 
-    user.dat <- user.dat[which(!user.dat == "" | is.na(user.dat)),]
+    ## if dat is redcap dictionary: 
+    #------------------------------
+    
+    # # remove empty rows 
+    # user.dat <- user.dat[which(!user.dat == "" | user.dat == NA),]
+    # 
+    # # eeperate values by , and make one-to-one relation between key-values
+    # 
+    # value <- user.dat[["value"]][!is.na(user.dict[["value"]])]
+    # key.values <- amy.dict[["key"]][!is.na(amy.dict[["value"]])]
+    # many.values <- as.data.frame(cbind(key.values, value))
+    # 
+    # values <- strsplit(many.values$value, "[,]")
+    # 
+    # normalized <- lapply(seq_along(many.values$key.values), function(i){
+    #   df <- lapply(seq_along(values[[i]]), function(j){
+    #     cbind(many.values$key.values[[i]], values[[i]][[j]])
+    #   })
+    #   df <- do.call(rbind, df)
+    #   return(df)
+    # })
+    # 
+    # normalized <- as.data.frame(do.call(rbind, normalized), stringsAsFactors = F)
+    # 
+    # names(normalized) <- c("key", "value")
+    # 
+    # only.keys <- as.data.frame(amy.dict[[1]][!is.na(amy.dict[[1]])][which(!amy.dict[[1]][!is.na(amy.dict[[1]])] %in% unique(normalized$key))], stringsAsFactors = F)
+    # names(only.keys) <- "key"
+    # only.keys[,"value"] <- NA
+    # 
+    # final.dat <- rbind(only.keys, normalized)
+    # 
+    # #TODO: pass in projects name
+    # final.dat[ ,"project"] <- "DHArMA"
+    # 
+    # #TODO: pass in cols don't exist 
+    # final.dat[,c("description", "columnType", "maximumSize", "value_description", "value_source")] <- NA
+    # 
+    # user.dat <- final.dat
     
     # Standardized user input to have the same colnames: this line needs to be removed
-    colnames(user.dat) <- c("key", "description", "columnType", "maximumSize", "value", "value_description", "value_source", "project")
-
+    standard.cols <- c("key", "description", "columnType", "maximumSize", "value", "value_description", "value_source", "project")
+    
+    if (!colnames(user.dat) %in% standard.cols){
+      #TODO: output error to ui
+      print("error")
+    }
+  
     dat <- rbind(dat, user.dat)
     dat 
   })
@@ -38,7 +80,7 @@ server <- function(input, output, session) {
     
     dataOut() 
   
-  },options = list(lengthMenu = c(5, 10, 50, 100), pageLength = 10))
+  },options = list(lengthMenu = c(5, 10, 50, 100, 1000), pageLength = 5))
 
   observe({
     x <- input$cat
