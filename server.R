@@ -22,8 +22,11 @@ server <- function(input, output, session) {
     }
     
     # Use fread function to catch user defined formats, handle large files, and execute correct errors as needed
-    user.dat <-  fread(inFile$datapath, encoding = "UTF-8", fill = TRUE)
-
+    user.dat <-  fread(inFile$datapath, encoding = "UTF-8", fill = TRUE, blank.lines.skip = TRUE, na.strings = c("",NA,"NULL") , data.table = FALSE)
+    
+    # remove empty rows 
+    user.dat <- user.dat[which(!user.dat == "" | is.na(user.dat)),]
+    
     # Standardized user input to have the same colnames: this line needs to be removed
     colnames(user.dat) <- c("key", "description", "columnType", "maximumSize", "value", "value_description", "value_source", "project")
 
