@@ -71,4 +71,7 @@ server <- function(input, output, session) {
       openxlsx::write.xlsx(sheets, file)
     }
   )
+  
+  # Automatically stop the app session after closing the browser tab
+  session$onSessionEnded(stopApp)
 }
