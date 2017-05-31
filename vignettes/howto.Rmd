@@ -6,16 +6,16 @@ output: html_document
 ---
 
 ##  Use-Case 1
-![Select projects annotations](img/select.png)
+![Select projects annotations](../img/select.png)
 
 ```{r}
 ```
 
 ##  Use-Case 2 
-![](img/add.png)
+![](../img/add.png)
 
 
 ## Use-Case 1 & 2 
-![](img/download.png)
+![](../img/download.png)
 
 
