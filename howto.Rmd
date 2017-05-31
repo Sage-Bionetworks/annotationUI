@@ -1,0 +1,21 @@
+---
+title: "How to Construct a Synapse Annotation Manifest"
+author: "Nasim Sanati"
+date: "5/16/2017"
+output: html_document
+---
+
+##  Use-Case 1
+![Select projects annotations](img/select.png)
+
+```{r}
+```
+
+##  Use-Case 2 
+![](img/add.png)
+
+
+## Use-Case 1 & 2 
+![](img/download.png)
+
+
