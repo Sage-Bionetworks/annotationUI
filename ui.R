@@ -43,7 +43,7 @@ y <- dashboardPage(
 )
 
 x <- dashboardPage(
-  dashboardHeader(title = "Annotation Utils UI"),
+  dashboardHeader(title = paste0("Annotation Utils UI ", release.version)),
   sidebar,
   body
 )

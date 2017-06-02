@@ -50,3 +50,8 @@ dat <- as.data.frame(queryResult@values)
 categories <- lapply(unique(dat$project), function(x) {x})
 all.vars <- names(dat)
 names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "valueSource", "project")
+
+# TODO: render github release version in title from synapse annotations for project annotation consensus 
+# https://github.com/Sage-Bionetworks/synapseAnnotations/releases
+release.version <- "0.1" 
+
