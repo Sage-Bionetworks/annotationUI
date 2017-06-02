@@ -24,11 +24,8 @@ server <- function(input, output, session) {
     # Use fread function to catch user defined formats, handle large files, and execute correct errors as needed
     user.dat <-  fread(inFile$datapath, encoding = "UTF-8", fill = TRUE, blank.lines.skip = TRUE, na.strings = c("",NA,"NULL") , data.table = FALSE)
     
-    ## if dat is redcap dictionary: 
-    #------------------------------
-    
     # remove empty rows 
-    user.dat <- user.dat[which(!user.dat == "" | user.dat == NA),]
+    user.dat <- user.dat[which(!user.dat == "" | is.na(user.dat)),]
 
     # extract complete cases of values or keys     
     value <- user.dat[["value"]][!is.na(user.dat[["value"]])]
@@ -69,7 +66,7 @@ server <- function(input, output, session) {
     # Standardized user input to have the same colnames: this line needs to be removed
     standard.cols <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "valueSource", "project")
     
-    if (!colnames(user.dat) %in% standard.cols){
+    if (!colnames(user.dat) %in% standard.cols) {
       #TODO: output error to ui
       print("error")
     }
