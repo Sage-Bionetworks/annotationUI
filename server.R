@@ -27,45 +27,47 @@ server <- function(input, output, session) {
     ## if dat is redcap dictionary: 
     #------------------------------
     
-    # # remove empty rows 
-    # user.dat <- user.dat[which(!user.dat == "" | user.dat == NA),]
-    # 
-    # # eeperate values by , and make one-to-one relation between key-values
-    # 
-    # value <- user.dat[["value"]][!is.na(user.dict[["value"]])]
-    # key.values <- amy.dict[["key"]][!is.na(amy.dict[["value"]])]
-    # many.values <- as.data.frame(cbind(key.values, value))
-    # 
-    # values <- strsplit(many.values$value, "[,]")
-    # 
-    # normalized <- lapply(seq_along(many.values$key.values), function(i){
-    #   df <- lapply(seq_along(values[[i]]), function(j){
-    #     cbind(many.values$key.values[[i]], values[[i]][[j]])
-    #   })
-    #   df <- do.call(rbind, df)
-    #   return(df)
-    # })
-    # 
-    # normalized <- as.data.frame(do.call(rbind, normalized), stringsAsFactors = F)
-    # 
-    # names(normalized) <- c("key", "value")
-    # 
-    # only.keys <- as.data.frame(amy.dict[[1]][!is.na(amy.dict[[1]])][which(!amy.dict[[1]][!is.na(amy.dict[[1]])] %in% unique(normalized$key))], stringsAsFactors = F)
-    # names(only.keys) <- "key"
-    # only.keys[,"value"] <- NA
-    # 
-    # final.dat <- rbind(only.keys, normalized)
-    # 
-    # #TODO: pass in projects name
-    # final.dat[ ,"project"] <- "DHArMA"
-    # 
-    # #TODO: pass in cols don't exist 
-    # final.dat[,c("description", "columnType", "maximumSize", "value_description", "value_source")] <- NA
-    # 
-    # user.dat <- final.dat
+    # remove empty rows 
+    user.dat <- user.dat[which(!user.dat == "" | user.dat == NA),]
+
+    # extract complete cases of values or keys     
+    value <- user.dat[["value"]][!is.na(user.dat[["value"]])]
+    key.values <- user.dat[["key"]][!is.na(user.dat[["value"]])]
+    many.values <- as.data.frame(cbind(key.values, value))
+    
+    # seperate values by , and make one-to-one relation between key-values
+    values <- strsplit(many.values$value, "[,]")
+    
+    # unnest or normalize each value to key relation 
+    normalized <- lapply(seq_along(many.values$key.values), function(i){
+      df <- lapply(seq_along(values[[i]]), function(j){
+        cbind(many.values$key.values[[i]], values[[i]][[j]])
+      })
+      df <- do.call(rbind, df)
+      return(df)
+    })
+    
+    normalized <- as.data.frame(do.call(rbind, normalized), stringsAsFactors = F)
+    names(normalized) <- c("key", "value")
+    
+    # extract keys without pre-defined values (ex. patientID where it could be left as NA due to privacy or timing)
+    only.keys <- as.data.frame(amy.dict[[1]][!is.na(amy.dict[[1]])][which(!amy.dict[[1]][!is.na(amy.dict[[1]])] %in% unique(normalized$key))], stringsAsFactors = F)
+    names(only.keys) <- "key"
+    only.keys[,"value"] <- NA
+    
+    # combine lone keys with normalized data
+    final.dat <- rbind(only.keys, normalized)
+
+    #TODO: pass in projects name
+    final.dat[ ,"project"] <- "DHArMA"
+
+    #TODO: pass in cols don't exist 
+    final.dat[,c("description", "columnType", "maximumSize", "valueDescription", "valueSource")] <- NA
+
+    user.dat <- final.dat
     
     # Standardized user input to have the same colnames: this line needs to be removed
-    standard.cols <- c("key", "description", "columnType", "maximumSize", "value", "value_description", "value_source", "project")
+    standard.cols <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "valueSource", "project")
     
     if (!colnames(user.dat) %in% standard.cols){
       #TODO: output error to ui
@@ -110,9 +112,9 @@ server <- function(input, output, session) {
       schema <- data.frame(matrix(ncol = length(columns), nrow = 0))
       colnames(schema) <- columns
       key.description <- user.dat[,c("key", "description", "columnType", "project")]
-      value.description <- user.dat[,c("key", "value", "value_description", "value_source", "project")]
+      value.description <- user.dat[,c("key", "value", "valueDescription", "valueSource", "project")]
       
-      sheets <- list(manifest = schema , key.description = key.description, keyvalue.description = value.description)
+      sheets <- list(manifest = schema , keyDescription = key.description, keyValueDescription = value.description)
       openxlsx::write.xlsx(sheets, file)
     }
   )

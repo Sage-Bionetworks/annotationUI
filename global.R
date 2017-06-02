@@ -49,4 +49,4 @@ dat <- as.data.frame(queryResult@values)
 
 categories <- lapply(unique(dat$project), function(x) {x})
 all.vars <- names(dat)
-names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "value_description", "value_source", "project")
+names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "valueSource", "project")
