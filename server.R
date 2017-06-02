@@ -32,10 +32,10 @@ server <- function(input, output, session) {
     
     user.project <- input$projectName
     
-    # TODO: validate maybe using a different function or BSshiny popup
-    #validate(
-    #   need(is.na(user.project), "Please enter your projects name. \n\n ")
-    #)
+    # check if project name exists 
+    validate(
+       need(length(user.project) != 0, "Please enter your projects name. \n\n ")
+    )
     
     # Trim whitespaces in project name
     user.project <- trimws(user.project)
