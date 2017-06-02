@@ -7,6 +7,11 @@
 server <- function(input, output, session) {
   # use the same name from output functions in ui
   # render function creates the type of output
+  # projectName <- reactive({
+  #   
+  #     renderText({input$name})
+  #   
+  # })
   
   dataOut <- reactive({
     
@@ -25,13 +30,15 @@ server <- function(input, output, session) {
       return(dat)
     }
     
-    #projectName <- renderText({input$name})
-   
-    #validate(
-       #need(is.na(projectName), "Please enter your projects name")
-     #)
+    user.project <- input$projectName
     
-    # TODO: check for whitespaces in project name
+    # TODO: validate maybe using a different function or BSshiny popup
+    #validate(
+    #   need(is.na(user.project), "Please enter your projects name. \n\n ")
+    #)
+    
+    # Trim whitespaces in project name
+    user.project <- trimws(user.project)
     
     # Upload user annotaions 
     # Use fread function to catch user defined formats, handle large files, and execute correct errors as needed
@@ -117,11 +124,11 @@ server <- function(input, output, session) {
       final.dat[ ,missing.columns] <- NA
     }
     
-    # TODO: pass in projects name
-    final.dat[ ,"project"] <- "amy"
+    # pass in projects name
+    final.dat[ ,"project"] <- user.project
 
     user.dat <- final.dat
-    print(user.dat)
+
     dat <- rbind(dat, user.dat)
     
     dat 
