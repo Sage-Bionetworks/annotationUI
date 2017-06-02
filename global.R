@@ -53,5 +53,5 @@ names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "val
 
 # TODO: render github release version in title from synapse annotations for project annotation consensus 
 # https://github.com/Sage-Bionetworks/synapseAnnotations/releases
-release.version <- "0.1" 
+release.version <- "v1.0.0" 
 
