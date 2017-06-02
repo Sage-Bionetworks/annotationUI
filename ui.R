@@ -29,10 +29,10 @@ sidebar <- dashboardSidebar(
   ),
   sidebarMenu(
     tags$hr(),
-    fileInput('userAnnot', 'Your Annotation CSV File',
-              accept = c('text/csv', 
-                       'text/comma-separated-values,text/plain', 
-                       '.csv'))
+    textInput("name", "Project name:"),
+    fileInput('userAnnot', 'Annotations CSV File',
+              accept = c('csv', 'comma-separated-values','.csv')),
+    tags$hr()
   )
 )
 

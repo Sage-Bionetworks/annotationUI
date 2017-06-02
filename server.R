@@ -7,6 +7,7 @@
 server <- function(input, output, session) {
   # use the same name from output functions in ui
   # render function creates the type of output
+  
   dataOut <- reactive({
     
     if (input$cat > 0) {
@@ -24,57 +25,105 @@ server <- function(input, output, session) {
       return(dat)
     }
     
+    #projectName <- renderText({input$name})
+   
+    #validate(
+       #need(is.na(projectName), "Please enter your projects name")
+     #)
+    
+    # TODO: check for whitespaces in project name
+    
+    # Upload user annotaions 
     # Use fread function to catch user defined formats, handle large files, and execute correct errors as needed
     user.dat <-  fread(inFile$datapath, encoding = "UTF-8", fill = TRUE, blank.lines.skip = TRUE, na.strings = c("",NA,"NULL") , data.table = FALSE)
     
-    # remove empty rows 
-    user.dat <- user.dat[which(!user.dat == "" | is.na(user.dat)),]
-
+    # then check for standard input columns 
+    validate(
+      need(c("key", "value") %in% colnames(user.dat), "Please provide key and value fields in your csv")
+    )
+    
+    standard.sage.colnames <- c("description", "columnType", "maximumSize", "valueDescription", "valueSource", "project")
+    columns <- which(colnames(user.dat) %in% standard.sage.colnames)
+    
+    if (length(columns) == 0) {
+      
+      # extract only key and value columns 
+      user.dat <- user.dat[,c("key", "value")]
+      user.dat <- user.dat[which(!user.dat == ""), ]
+      user.dat <- user.dat[rowSums(is.na(user.dat)) != 2, ]
+      
+    }
+    
+    if (length(columns) > 0) {
+      
+      # extract key, value, and standard sage columns
+      n <- length(c(c("key", "value"), columns))
+      user.dat <- user.dat[ ,c(c("key", "value"), columns)]
+      user.dat <- user.dat[which(!user.dat == ""),]
+      user.dat <- user.dat[rowSums(is.na(user.dat)) != n, ]
+      
+    }
+    
     # extract complete cases of values or keys     
-    value <- user.dat[["value"]][!is.na(user.dat[["value"]])]
-    key.values <- user.dat[["key"]][!is.na(user.dat[["value"]])]
+    value <- user.dat$value[!is.na(user.dat$value)]
+    key.values <- user.dat$key[!is.na(user.dat$value)]
     many.values <- as.data.frame(cbind(key.values, value))
     
-    # seperate values by , and make one-to-one relation between key-values
-    values <- strsplit(many.values$value, "[,]")
-    
-    # unnest or normalize each value to key relation 
-    normalized <- lapply(seq_along(many.values$key.values), function(i){
-      df <- lapply(seq_along(values[[i]]), function(j){
-        cbind(many.values$key.values[[i]], values[[i]][[j]])
+    # check if user provided list of comma seperated values  
+    if (any(grepl(",", user.dat$value))) {
+      
+      # seperate values by , and make one-to-one relation between key-values
+      values <- strsplit(many.values$value, "[,]")
+      
+      # unnest or normalize each value to key relation 
+      normalized <- lapply(seq_along(many.values$key.values), function(i){
+        df <- lapply(seq_along(values[[i]]), function(j){
+          cbind(many.values$key.values[[i]], values[[i]][[j]])
+        })
+        df <- do.call(rbind, df)
+        return(df)
       })
-      df <- do.call(rbind, df)
-      return(df)
-    })
+      
+      normalized <- as.data.frame(do.call(rbind, normalized), stringsAsFactors = F)
+      names(normalized) <- c("key", "value")
+      
+      # extract keys without pre-defined values (ex. patientID where it could be left as NA due to privacy or timing)
+      only.keys <- as.data.frame(user.dat$key[!is.na(user.dat$key)][which(!user.dat$key[!is.na(user.dat$key)] %in% unique(normalized$key))], stringsAsFactors = F)
+      if (length(only.keys) > 0) {
+        
+        names(only.keys) <- "key"
+        only.keys[ ,"value"] <- NA
+        final.dat <- rbind(only.keys, normalized)
+      }else{
+        
+        final.dat <- normalized
+      }
+      
+    }else{
+      
+      final.dat <- user.dat
+    }
     
-    normalized <- as.data.frame(do.call(rbind, normalized), stringsAsFactors = F)
-    names(normalized) <- c("key", "value")
+    if (length(columns) == 0) {
+      
+      # build standard schema
+      final.dat[,c("description", "columnType", "maximumSize", "valueDescription", "valueSource")] <- NA
+    }
     
-    # extract keys without pre-defined values (ex. patientID where it could be left as NA due to privacy or timing)
-    only.keys <- as.data.frame(amy.dict[[1]][!is.na(amy.dict[[1]])][which(!amy.dict[[1]][!is.na(amy.dict[[1]])] %in% unique(normalized$key))], stringsAsFactors = F)
-    names(only.keys) <- "key"
-    only.keys[,"value"] <- NA
+    if (length(columns) > 0) {
     
-    # combine lone keys with normalized data
-    final.dat <- rbind(only.keys, normalized)
-
-    #TODO: pass in projects name
-    final.dat[ ,"project"] <- "DHArMA"
-
-    #TODO: pass in cols don't exist 
-    final.dat[,c("description", "columnType", "maximumSize", "valueDescription", "valueSource")] <- NA
+      missing.columns <- standard.sage.colnames[which(!c(c("key", "value"), columns) %in% standard.sage.colnames)]
+      # build standard schema
+      final.dat[ ,missing.columns] <- NA
+    }
+    
+    # TODO: pass in projects name
+    final.dat[ ,"project"] <- "amy"
 
     user.dat <- final.dat
-    
-    # Standardized user input to have the same colnames: this line needs to be removed
-    standard.cols <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "valueSource", "project")
-    
-    if (!colnames(user.dat) %in% standard.cols) {
-      #TODO: output error to ui
-      print("error")
-    }
-  
+    print(user.dat)
     dat <- rbind(dat, user.dat)
+    
     dat 
   })
 
