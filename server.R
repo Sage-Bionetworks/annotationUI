@@ -147,6 +147,11 @@ server <- function(input, output, session) {
       x <- character(0)
     }
     
+    if (length(input$projectName) != 0) {
+      
+      x <- c(input$cat, input$projectName)
+    }
+    
     updateCheckboxGroupInput(session, "",
                              label = paste("", length(x)),
                              choices = x,
