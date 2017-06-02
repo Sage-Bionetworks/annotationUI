@@ -8,7 +8,10 @@ server <- function(input, output, session) {
   # use the same name from output functions in ui
   # render function creates the type of output
   dataOut <- reactive({
+    
     if (input$cat > 0) {
+      
+      # filter by user-defined project category 
       dat <- dat[which(dat$project %in% input$cat),]
     }
     else{
@@ -100,22 +103,33 @@ server <- function(input, output, session) {
     filename <- function() {'annotations_manifest.xlsx'},
     content <- function(file) {
       
+      # get user-defined table to download 
       user.dat <- dataOut()
       
+      # add columns for synapse projects 
       first.cols <- c("synapseId", "fileName")
+      
+      # extract a unique key to deine the manifest columns
       user.cols <- unique(user.dat[["key"]])
       
+      # create the manifest schema 
       columns <- append(c("synapseId", "fileName"), user.cols)
       schema <- data.frame(matrix(ncol = length(columns), nrow = 0))
       colnames(schema) <- columns
+      
+      # create the key and key-value description dataframes
       key.description <- user.dat[,c("key", "description", "columnType", "project")]
       value.description <- user.dat[,c("key", "value", "valueDescription", "valueSource", "project")]
       
+      # create three sheets including: 
+      #     1. manifest columns 
+      #     2. key 
+      #     3. ke-value pair description 
       sheets <- list(manifest = schema , keyDescription = key.description, keyValueDescription = value.description)
       openxlsx::write.xlsx(sheets, file)
     }
   )
   
-  # Automatically stop the app session after closing the browser tab
+  # automatically stop the app session after closing the browser tab
   session$onSessionEnded(stopApp)
 }
