@@ -6,7 +6,7 @@
 
 ### Use-case documentation 
 
-### How to Use on a different server 
+### How to use on a different server 
 
 
 
