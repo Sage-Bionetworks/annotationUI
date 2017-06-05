@@ -15,8 +15,9 @@ server <- function(input, output, session) {
   
   dataOut <- reactive({
     
+    
+    
     if (input$cat > 0) {
-      
       # filter by user-defined project category 
       dat <- dat[which(dat$project %in% input$cat),]
     }
@@ -34,9 +35,9 @@ server <- function(input, output, session) {
     
     # check if project name exists 
     validate(
-       need(length(user.project) != 0, "Please enter your projects name. \n\n ")
+       need(user.project, "Please enter your projects name. \n\n ")
     )
-    
+  
     # Trim whitespaces in project name
     user.project <- trimws(user.project)
     
@@ -141,21 +142,22 @@ server <- function(input, output, session) {
   },options = list(lengthMenu = c(5, 10, 50, 100, 1000), pageLength = 5))
 
   observe({
-    x <- input$cat
+    project.category <- input$cat
     
-    if (is.null(x)) {
-      x <- character(0)
+    if (is.null(project.category)) {
+      project.category <- character(0)
     }
     
-    if (length(input$projectName) != 0) {
-      
-      x <- c(input$cat, input$projectName)
+    # append users project name to project categories 
+    if (input$projectName > 0) {
+      project.category <- c(project.category, input$projectName)
     }
-    
-    updateCheckboxGroupInput(session, "",
-                             label = paste("", length(x)),
-                             choices = x,
-                             selected = x
+   
+    # TODO: update the checkbox does not update the UI 
+    updateCheckboxGroupInput(session, "user project selection",
+                             label = paste("", length(project.category)),
+                             choices = project.category,
+                             selected = project.category
     )
   })
   
