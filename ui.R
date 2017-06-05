@@ -22,17 +22,19 @@ sidebar <- dashboardSidebar(
     checkboxGroupInput("cat", "Project Category",
                        choiceNames = categories,
                        choiceValues = categories, 
-                       selected = categories),
-    bsTooltip("cat", "Select the projects containing the annotations that you need",
-              "right")
-
+                       selected = categories)
+    #bsTooltip("cat", "Select projects containing the annotations required for your project",
+    #          "right")
+   
   ),
   sidebarMenu(
     tags$hr(),
     textInput("projectName", "Project Name"),
-    fileInput('userAnnot', 'Annotations CSV File',
-              accept = c('csv', 'comma-separated-values','.csv')),
+    fileInput("userAnnot", "Annotations CSV File",
+              accept = c("csv", "comma-separated-values",".csv")),
     tags$hr()
+    #bsTooltip("projectName", "Write your projects name then upload the csv file containing your projects annotations with the minimal key and value(s) (comma seperated list) fields",
+    #          "right")
   )
 )
 

@@ -1,21 +1,34 @@
 ---
-title: "How to Construct a Synapse Annotation Manifest"
-author: "Nasim Sanati"
-date: "5/16/2017"
-output: html_document
+title: "How to Construct and Use a Synapse Annotation Manifest"
 ---
-
-##  Use-Case 1
-![Select projects annotations](../img/select.png)
+##  Search
+Search table globally or by field(s)/column(s)
+![](../img/search1.png)
 
 ```{r}
 ```
 
-##  Use-Case 2 
-![](../img/add.png)
+Example: searching by column
+![](../img/search2.png)
+
+## Selecting projects 
+![](../img/select.png)
 
 
-## Use-Case 1 & 2 
+## Adding to annotations (user specific and non-standardized)
+Type in your project's name
+![Type in your project's name](../img/add1.png)
+
+Upload annotations csv file
+![](../img/add2.png)
+
+Upload completion message
+![](../img/add3.png)
+
+## Downloading annotation's manifest 
+Download button
 ![](../img/download.png)
 
+## Annotation Release versioning 
+![](../img/releaseVersion.png)
 

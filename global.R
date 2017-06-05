@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # Simple Shiny template for annotations utils 
-# search, display, merge, and download prototype 
+# search, select, merge and download prototype 
 # ------------------------------------------------------------------------------
 usePackage <- function(p) 
 {
@@ -9,13 +9,12 @@ usePackage <- function(p)
   require(p, character.only = TRUE)
 }
 usePackage("dplyr")
-usePackage("openxlsx")
+usePackage("tidyr")
 usePackage("shiny")
 usePackage("ggplot2")
+usePackage("openxlsx")
 usePackage("shinydashboard")
 usePackage("data.table")
-
-
 
 # source('http://depot.sagebase.org/CRAN.R')
 # pkgInstall("synapseClient")
@@ -27,7 +26,6 @@ library(dplyr)
 library(tidyr)
 library(shiny)
 library(shinyBS)
-library(ggplot2)
 library(openxlsx)
 library(data.table)
 library(synapseClient)
@@ -44,6 +42,8 @@ synapseLogin()
 # ----------------------------------------------------------------------
 options(stringsAsFactors = FALSE)
 
+# by replacing the global dat variable
+# you may use this app using the standard schema but your own melted data 
 queryResult <- synTableQuery('select * from syn9894838')
 dat <- as.data.frame(queryResult@values)
 

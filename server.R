@@ -7,15 +7,7 @@
 server <- function(input, output, session) {
   # use the same name from output functions in ui
   # render function creates the type of output
-  # projectName <- reactive({
-  #   
-  #     renderText({input$name})
-  #   
-  # })
-  
   dataOut <- reactive({
-    
-    
     
     if (input$cat > 0) {
       # filter by user-defined project category 
@@ -139,7 +131,7 @@ server <- function(input, output, session) {
     
     dataOut() 
   
-  },options = list(lengthMenu = c(5, 10, 50, 100, 1000), pageLength = 5))
+  },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 5))
 
   observe({
     project.category <- input$cat
