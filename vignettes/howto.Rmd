@@ -1,34 +1,65 @@
 ---
-title: "How to Construct and Use a Synapse Annotation Manifest"
+title: "How to Construct a Synapse Annotation Manifest"
 ---
-##  Search
-Search table globally or by field(s)/column(s)
+<br>
+
+###Search and find 
+
+#### Search table globally or by field(s)/column(s)
+
 ![](../img/search1.png)
 
 ```{r}
 ```
+<br><br>
 
-Example: searching by column
+#### and find the projects containing the annotations that you need (ex. searching by column)
+
 ![](../img/search2.png)
 
-## Selecting projects 
+<br><br>
+
+### Select Sage Bionetworks projects
+
+#### Then select those projects. Note that the project categories only list Sage Bionetworks projects annotations that have gone through extensive standardization procedures through scientists.
+
 ![](../img/select.png)
 
+<br><br>
 
-## Adding to annotations (user specific and non-standardized)
-Type in your project's name
-![Type in your project's name](../img/add1.png)
+### Add annotations for manifest construction
 
-Upload annotations csv file
+#### You can add your projects annotations to the existing annotations. This data would only exist until you have downloaded the manifest. Your annotations for manifest construction (user specific and non-standardized)
+
+#### First you must provide your projects name by typing it in the text box. 
+
+![](../img/add1.png)
+
+<br><br>
+
+#### then upload your annotations csv file with the minimum of key and value columns by browsing your directories.  
+
 ![](../img/add2.png)
 
-Upload completion message
+<br><br>
+
+#### you will see a message after your annotations upload has been completed with no errors.
+
 ![](../img/add3.png)
 
-## Downloading annotation's manifest 
-Download button
+<br><br>
+
+### Download manifest
+
+#### Finally you can download the manifest you created 
+
 ![](../img/download.png)
 
-## Annotation Release versioning 
+<br><br>
+
+### Release versions 
+
+#### Sage Bionetworks annotations have release versions with the latest version being indicated on the shiny app title. Users are encouraged to place the used version number on their projects’ wiki. This will enable auditing the annotations fairly easily.
+
 ![](../img/releaseVersion.png)
 
