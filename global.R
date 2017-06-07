@@ -51,7 +51,6 @@ categories <- lapply(unique(dat$project), function(x) {x})
 all.vars <- names(dat)
 names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "valueSource", "project")
 
-# TODO: render github release version in title from synapse annotations for project annotation consensus 
-# https://github.com/Sage-Bionetworks/synapseAnnotations/releases
-release.version <- "v1.0.0" 
+# Render latest github release version in title from synapseAnnotations repo
+release.version <- gsub(".*/", "", system("git ls-remote --tags https://github.com/Sage-Bionetworks/synapseAnnotations", intern = TRUE)[[1]])
 

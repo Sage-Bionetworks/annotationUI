@@ -9,26 +9,31 @@ server <- function(input, output, session) {
   # render function creates the type of output
   dataOut <- reactive({
     
-    if (input$cat > 0) {
+    validate(
+      need(length(input$cat) != 0, "Select a Sage Bionetworks project.\n\n You may also upload your annotations to download a manifest. \n\n ")
+    )
+    
+    if (length(input$cat) > 0) {
       # filter by user-defined project category 
       data.output <- dat[which(dat$project %in% input$cat),]
+      data.output
     }
     else{
       data.output
     }
-    
   })
-  
+  ?reactive
   userData <- reactive({
     
     file <- input$userAnnot
     
-    if (is.null(file)) {
-      # TODO popup error
-    }
+    # check if file exists 
+    validate(
+      need(file, "Your csv file can't be located. Please try again! \n\n ")
+    )
     
     user.project <- input$projectName
-    
+ 
     # check if project name exists 
     validate(
       need(user.project, "Please enter your projects name. \n\n ")
@@ -126,11 +131,13 @@ server <- function(input, output, session) {
     # pass in projects name
     final.dat[ ,"project"] <- user.project
     
-    # user.dat <- final.dat
+    if (length(input$cat) != 0) {
+      final.dat <- rbind(dataOut(), final.dat)
+      final.dat
+    }else{
+      final.dat
+    }
     
-    # TODO: create state for table and rewind to initial data after download action has been completed 
-    final.dat <- rbind(dataOut(), final.dat)
-    final.dat
   })
 
   output$annotationTable <- shiny::renderDataTable({
@@ -145,7 +152,6 @@ server <- function(input, output, session) {
     content <- function(file) {
       
       # get user-defined table to download 
-      # user.table <- dataOut()
       user.table <- userData()
       
       # add columns for synapse projects 
@@ -165,12 +171,15 @@ server <- function(input, output, session) {
       
       # create three sheets including: 
       #     1. manifest columns 
-      #     2. key 
-      #     3. ke-value pair description 
+      #     2. key descriptions 
+      #     3. value descriptions (key-value)
       sheets <- list(manifest = schema , keyDescription = key.description, keyValueDescription = value.description)
       openxlsx::write.xlsx(sheets, file)
     }
   )
+  
+  # allow refresh to run locally without a server 
+  # session$allowReconnect("force")
   
   # automatically stop the app session after closing the browser tab
   session$onSessionEnded(stopApp)

@@ -22,34 +22,30 @@ sidebar <- dashboardSidebar(
     checkboxGroupInput("cat", "Project Category",
                        choiceNames = categories,
                        choiceValues = categories, 
-                       selected = categories)
-    #bsTooltip("cat", "Select projects containing the annotations required for your project",
-    #          "right")
-   
+                       selected = categories),
+    bsTooltip("cat", "Select projects containing the annotations required for your project",
+              "right"),
+    tags$hr()
   ),
   sidebarMenu(
-    tags$hr(),
+    p(strong("Upload your project's annotations"), align = "center"), 
     textInput("projectName", "Project Name"),
+    # TODO: introduce size in bytes for the uploaded files  
     fileInput("userAnnot", "Annotations CSV File",
               accept = c("csv", "comma-separated-values",".csv")),
-    tags$hr()
-    #bsTooltip("projectName", "Write your projects name then upload the csv file containing your projects annotations with the minimal key and value(s) (comma seperated list) fields",
-    #          "right")
+    tags$hr(),
+    bsTooltip("projectName", "Write your project's name then upload the csv file containing your projects annotations with the minimal key and value(s) fields (syntax is described on docs)",
+              "right")
+    # actionButton("removeUserDat", "Remove your annotations")
   )
 )
 
-y <- dashboardPage(
-  dashboardHeader(title = "How-TO's"),
-  dashboardSidebar(disable = TRUE),
-  dashboardBody()
-)
-
-x <- dashboardPage(
+mainPage <- dashboardPage(
   dashboardHeader(title = paste0("Annotation UI ", release.version)),
   sidebar,
   body
 )
 
 ui <- shinyUI(
-  x
+  mainPage
 )
