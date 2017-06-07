@@ -16,7 +16,7 @@ Given the heterogeneous processes of each organization, in order to join user sp
 The schema to capture the one-to-one pairwise key-value relations is defined as: 
  
 
- key |description| columnType | maximumSize | value | valueDescription | valueSource | project
+ key |description| columnType | maximumSize | value | valueDescription | source | project
 --- | --- | --- | --- | --- | --- | --- | --- 
 
 The minimum required fields/columns to hold this relation are  
