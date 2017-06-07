@@ -11,16 +11,16 @@ server <- function(input, output, session) {
     
     if (input$cat > 0) {
       # filter by user-defined project category 
-      dat <- dat[which(dat$project %in% input$cat),]
+      data.output <- dat[which(dat$project %in% input$cat),]
     }
     else{
-      dat
+      data.output
     }
     
     inFile <- input$userAnnot
     
     if (is.null(inFile)) {
-      return(dat)
+      return(data.output)
     }
     
     user.project <- input$projectName
@@ -89,11 +89,13 @@ server <- function(input, output, session) {
       
       # extract keys without pre-defined values (ex. patientID where it could be left as NA due to privacy or timing)
       only.keys <- as.data.frame(user.dat$key[!is.na(user.dat$key)][which(!user.dat$key[!is.na(user.dat$key)] %in% unique(normalized$key))], stringsAsFactors = F)
-      if (length(only.keys) > 0) {
+      
+      if (length(only.keys) == 0) {
         
         names(only.keys) <- "key"
         only.keys[ ,"value"] <- NA
         final.dat <- rbind(only.keys, normalized)
+        
       }else{
         
         final.dat <- normalized
@@ -121,10 +123,10 @@ server <- function(input, output, session) {
     final.dat[ ,"project"] <- user.project
 
     user.dat <- final.dat
-
-    dat <- rbind(dat, user.dat)
     
-    dat 
+    # TODO: create state for table and rewind to initial data after download action has been completed 
+    data.output <- rbind(data.output, user.dat)
+    data.output
   })
 
   output$annotationTable <- shiny::renderDataTable({
@@ -132,26 +134,6 @@ server <- function(input, output, session) {
     dataOut() 
   
   },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 5))
-
-  observe({
-    project.category <- input$cat
-    
-    if (is.null(project.category)) {
-      project.category <- character(0)
-    }
-    
-    # append users project name to project categories 
-    if (input$projectName > 0) {
-      project.category <- c(project.category, input$projectName)
-    }
-   
-    # TODO: update the checkbox does not update the UI 
-    updateCheckboxGroupInput(session, "user project selection",
-                             label = paste("", length(project.category)),
-                             choices = project.category,
-                             selected = project.category
-    )
-  })
   
   
   output$downloadSchema <- downloadHandler(
@@ -159,13 +141,13 @@ server <- function(input, output, session) {
     content <- function(file) {
       
       # get user-defined table to download 
-      user.dat <- dataOut()
+      user.table <- dataOut()
       
       # add columns for synapse projects 
       first.cols <- c("synapseId", "fileName")
       
       # extract a unique key to deine the manifest columns
-      user.cols <- unique(user.dat[["key"]])
+      user.cols <- unique(user.table[["key"]])
       
       # create the manifest schema 
       columns <- append(c("synapseId", "fileName"), user.cols)
@@ -173,8 +155,8 @@ server <- function(input, output, session) {
       colnames(schema) <- columns
       
       # create the key and key-value description dataframes
-      key.description <- user.dat[,c("key", "description", "columnType", "project")]
-      value.description <- user.dat[,c("key", "value", "valueDescription", "valueSource", "project")]
+      key.description <- user.table[,c("key", "description", "columnType", "project")]
+      value.description <- user.table[,c("key", "value", "valueDescription", "valueSource", "project")]
       
       # create three sheets including: 
       #     1. manifest columns 
