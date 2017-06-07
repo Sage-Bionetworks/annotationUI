@@ -141,10 +141,10 @@ server <- function(input, output, session) {
   })
 
   output$annotationTable <- shiny::renderDataTable({
-    
+  
     dataOut() 
   
-  },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 5))
+  },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 5, scrollX = TRUE, style = 'overflow-x: auto'))
   
   
   output$downloadSchema <- downloadHandler(
