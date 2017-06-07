@@ -44,12 +44,12 @@ options(stringsAsFactors = FALSE)
 
 # by replacing the global dat variable
 # you may use this app using the standard schema but your own melted data 
-queryResult <- synTableQuery('select * from syn9894838')
+queryResult <- synTableQuery('select * from syn9968225')
 dat <- as.data.frame(queryResult@values)
 
 categories <- lapply(unique(dat$project), function(x) {x})
 all.vars <- names(dat)
-names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "valueSource", "project")
+names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "source", "project")
 
 # Render latest github release version in title from synapseAnnotations repo
 release.version <- gsub(".*/", "", system("git ls-remote --tags https://github.com/Sage-Bionetworks/synapseAnnotations", intern = TRUE)[[1]])

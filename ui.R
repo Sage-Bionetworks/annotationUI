@@ -28,7 +28,7 @@ sidebar <- dashboardSidebar(
     tags$hr()
   ),
   sidebarMenu(
-    p(strong("Upload your project's annotations"), align = "center"), 
+    p(strong("Upload Your Project's Annotations"), align = "center"), 
     textInput("projectName", "Project Name"),
     # TODO: introduce size in bytes for the uploaded files  
     fileInput("userAnnot", "Annotations CSV File",

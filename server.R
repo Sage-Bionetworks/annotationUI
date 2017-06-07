@@ -51,7 +51,7 @@ server <- function(input, output, session) {
       need(c("key", "value") %in% colnames(user.dat), "Please provide key and value fields in your csv")
     )
     
-    standard.sage.colnames <- c("description", "columnType", "maximumSize", "valueDescription", "valueSource", "project")
+    standard.sage.colnames <- c("description", "columnType", "maximumSize", "valueDescription", "source", "project")
     columns <- which(colnames(user.dat) %in% standard.sage.colnames)
     
     if (length(columns) == 0) {
@@ -118,7 +118,7 @@ server <- function(input, output, session) {
     if (length(columns) == 0) {
       
       # build standard schema
-      final.dat[,c("description", "columnType", "maximumSize", "valueDescription", "valueSource")] <- NA
+      final.dat[,c("description", "columnType", "maximumSize", "valueDescription", "source")] <- NA
     }
     
     if (length(columns) > 0) {
@@ -167,7 +167,7 @@ server <- function(input, output, session) {
       
       # create the key and key-value description dataframes
       key.description <- user.table[,c("key", "description", "columnType", "project")]
-      value.description <- user.table[,c("key", "value", "valueDescription", "valueSource", "project")]
+      value.description <- user.table[,c("key", "value", "valueDescription", "source", "project")]
       
       # create three sheets including: 
       #     1. manifest columns 
