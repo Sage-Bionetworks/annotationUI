@@ -5,9 +5,6 @@
 #### Search table globally or by field(s)/column(s)
 
 ![](../img/search1.png)
-
-```{r}
-```
 <br>
 
 #### and find the projects containing the annotations that you need (ex. searching by column)
