@@ -42,7 +42,8 @@ diagnosis | AML / Acute Myeloid Leukemia , SecAML / Secondary AML , CML / Chroni
 
 
 ### Data release information 
-[In progress](https://github.com/Sage-Bionetworks/synapseAnnotations/issues/144)
+[Sage Bionetworks annotations release versions](https://github.com/Sage-Bionetworks/synapseAnnotations/releases)
+[Version format and use](https://github.com/Sage-Bionetworks/synapseAnnotations/issues/144)
 
 ### Use-case documentation 
 `vignettes` folder contains an R markdown and knitted html file with instructive tutorials demonstrating practical uses of the annotationUI shiny app. 
