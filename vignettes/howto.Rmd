@@ -1,9 +1,9 @@
 ---
 title: "How to Construct a Synapse Annotation Manifest"
 ---
-<br>
+<br><br>
 
-###Search and find 
+### Search and find 
 
 #### Search table globally or by field(s)/column(s)
 
@@ -11,13 +11,13 @@ title: "How to Construct a Synapse Annotation Manifest"
 
 ```{r}
 ```
-<br><br>
+<br>
 
 #### and find the projects containing the annotations that you need (ex. searching by column)
 
 ![](../img/search2.png)
 
-<br><br>
+<br>
 
 ### Select Sage Bionetworks projects
 
@@ -25,7 +25,9 @@ title: "How to Construct a Synapse Annotation Manifest"
 
 ![](../img/select.png)
 
-<br><br>
+<br>
+
+<hr/>
 
 ### Add annotations for manifest construction
 
@@ -35,19 +37,21 @@ title: "How to Construct a Synapse Annotation Manifest"
 
 ![](../img/add1.png)
 
-<br><br>
+<br>
 
 #### then upload your annotations csv file with the minimum of key and value columns by browsing your directories.  
 
 ![](../img/add2.png)
 
-<br><br>
+<br>
 
 #### you will see a message after your annotations upload has been completed with no errors.
 
 ![](../img/add3.png)
 
-<br><br>
+<br>
+
+<hr/>
 
 ### Download manifest
 
@@ -55,7 +59,9 @@ title: "How to Construct a Synapse Annotation Manifest"
 
 ![](../img/download.png)
 
-<br><br>
+<br>
+
+<hr/>
 
 ### Release versions 
 
