@@ -1,7 +1,4 @@
----
-title: "How to Construct a Synapse Annotation Manifest"
----
-<br><br>
+## How to Construct a Synapse Annotation Manifest
 
 ### Search and find 
 
@@ -17,15 +14,13 @@ title: "How to Construct a Synapse Annotation Manifest"
 
 ![](../img/search2.png)
 
-<br>
+<hr/>
 
 ### Select Sage Bionetworks projects
 
 #### Then select those projects. Note that the project categories only list Sage Bionetworks projects annotations that have gone through extensive standardization procedures through scientists.
 
 ![](../img/select.png)
-
-<br>
 
 <hr/>
 
@@ -49,8 +44,6 @@ title: "How to Construct a Synapse Annotation Manifest"
 
 ![](../img/add3.png)
 
-<br>
-
 <hr/>
 
 ### Download manifest
@@ -58,8 +51,6 @@ title: "How to Construct a Synapse Annotation Manifest"
 #### Finally you can download the manifest you created 
 
 ![](../img/download.png)
-
-<br>
 
 <hr/>
 
