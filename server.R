@@ -17,25 +17,29 @@ server <- function(input, output, session) {
       data.output
     }
     
-    inFile <- input$userAnnot
+  })
+  
+  userData <- reactive({
     
-    if (is.null(inFile)) {
-      return(data.output)
+    file <- input$userAnnot
+    
+    if (is.null(file)) {
+      # TODO popup error
     }
     
     user.project <- input$projectName
     
     # check if project name exists 
     validate(
-       need(user.project, "Please enter your projects name. \n\n ")
+      need(user.project, "Please enter your projects name. \n\n ")
     )
-  
+    
     # Trim whitespaces in project name
     user.project <- trimws(user.project)
     
     # Upload user annotaions 
     # Use fread function to catch user defined formats, handle large files, and execute correct errors as needed
-    user.dat <-  fread(inFile$datapath, encoding = "UTF-8", fill = TRUE, blank.lines.skip = TRUE, na.strings = c("",NA,"NULL") , data.table = FALSE)
+    user.dat <-  fread(file$datapath, encoding = "UTF-8", fill = TRUE, blank.lines.skip = TRUE, na.strings = c("",NA,"NULL") , data.table = FALSE)
     
     # then check for standard input columns 
     validate(
@@ -113,7 +117,7 @@ server <- function(input, output, session) {
     }
     
     if (length(columns) > 0) {
-    
+      
       missing.columns <- standard.sage.colnames[which(!c(c("key", "value"), columns) %in% standard.sage.colnames)]
       # build standard schema
       final.dat[ ,missing.columns] <- NA
@@ -121,12 +125,12 @@ server <- function(input, output, session) {
     
     # pass in projects name
     final.dat[ ,"project"] <- user.project
-
-    user.dat <- final.dat
+    
+    # user.dat <- final.dat
     
     # TODO: create state for table and rewind to initial data after download action has been completed 
-    data.output <- rbind(data.output, user.dat)
-    data.output
+    final.dat <- rbind(dataOut(), final.dat)
+    final.dat
   })
 
   output$annotationTable <- shiny::renderDataTable({
@@ -141,7 +145,8 @@ server <- function(input, output, session) {
     content <- function(file) {
       
       # get user-defined table to download 
-      user.table <- dataOut()
+      # user.table <- dataOut()
+      user.table <- userData()
       
       # add columns for synapse projects 
       first.cols <- c("synapseId", "fileName")
