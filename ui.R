@@ -18,22 +18,25 @@ body <- dashboardBody(
 )
 
 sidebar <- dashboardSidebar(
-  sidebarMenu(
+  sidebarMenu(id = "projectCategory",
+              
+    # menuItem("Project Category", tabName = "Project Category", icon = icon("info")),
     checkboxGroupInput("cat", "Project Category",
                        choiceNames = categories,
                        choiceValues = categories, 
                        selected = categories),
-    bsTooltip("cat", "Select the projects \\ that contain the annotations \\ required for your project",
+    bsTooltip("projectCategory", "Select the projects \\ that contain the annotations \\ required for your project",
               "right"),
     tags$hr()
   ),
-  sidebarMenu(
+  sidebarMenu(id = "upload",
+    # menuItem("Upload annotations", tabName = "Upload annotations", icon = icon("info")),
     p(strong("Upload Your Project's Annotations"), align = "center"), 
     textInput("projectName", "Project Name"),
     # TODO: introduce size in bytes for the uploaded files  
     fileInput("userAnnot", "Annotations CSV File",
               accept = c("csv", "comma-separated-values",".csv")),
-    bsTooltip("projectName", "Write your projects name  \\ then upload the csv file containing \\ your projects annotations with the minimal key and value(s) fields (syntax is described on docs)",
+    bsTooltip("upload", "Write your projects name  \\ then upload the csv file containing \\ your projects annotations with the minimal key and value(s) fields (syntax is described on docs)",
               "right"), 
     tags$hr()
     # actionButton("removeUserDat", "Remove your annotations")
