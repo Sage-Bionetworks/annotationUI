@@ -23,7 +23,7 @@
 
 ### Add annotations for manifest construction
 
-#### You can add your projects annotations to the existing annotations. This data would only exist until you have downloaded the manifest. Your annotations for manifest construction (user specific and non-standardized)
+#### You can add your projects annotations to the existing annotations. This data would only exist on your platform's session for user-defined manifest construction purposes.
 
 #### First you must provide your projects name by typing it in the text box. 
 
