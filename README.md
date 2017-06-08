@@ -47,7 +47,7 @@ diagnosis | AML / Acute Myeloid Leukemia , SecAML / Secondary AML , CML / Chroni
 [Version format and use](https://github.com/Sage-Bionetworks/synapseAnnotations/issues/144)
 
 ### Use-case documentation 
-`vignettes` folder contains an R markdown and knitted html file with instructive tutorials demonstrating practical uses of the annotationUI shiny app. 
+`vignettes` folder contains an R markdown with instructive tutorials demonstrating practical uses of the annotationUI shiny app. 
 
 ### How to use on a different server 
 Replacing the **dat** variable in `global.R` would allow for users to re-define the annotations given the same schema defined as above. 
