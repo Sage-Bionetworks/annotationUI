@@ -22,7 +22,7 @@ server <- function(input, output, session) {
       data.output
     }
   })
-  ?reactive
+ 
   userData <- reactive({
     
     file <- input$userAnnot
