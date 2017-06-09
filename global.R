@@ -33,7 +33,7 @@ library(shinydashboard)
 
 # ----------------------------------------------------------------------
 # login to synapse 
-# syn.login('me@nowhere.com', 'secret', rememberMe=True)
+# syn.login('me@nowhere.com', 'secret', rememberMe = TRUE)
 # or caching credentials can also be done from the command line client:
 # synapse login -u me@nowhere.com -p secret --rememberMe
 # ----------------------------------------------------------------------
