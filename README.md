@@ -52,3 +52,13 @@ diagnosis | AML / Acute Myeloid Leukemia , SecAML / Secondary AML , CML / Chroni
 ### How to use on a different server 
 Replacing the **dat** variable in `global.R` would allow for users to re-define the annotations given the same schema defined as above. 
 You can clone or fork this repo and host the app on a private or [shiny server](https://www.rstudio.com/products/shiny/shiny-server/)
+
+### Modular agile flow 
+![alt tag](img/agile-flow.png)
+1. Define consensus annotations with definitions and source meta data (Format = versioned json files). 
+
+2. Build your projects’ manifest using a User Interface (UI).
+
+3. Annotate your files on synapse using annotation utils functions (update or audit annotations). 
+
+repeat ...
