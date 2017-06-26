@@ -152,12 +152,16 @@ server <- function(input, output, session) {
     content <- function(file) {
       
       # get user-defined table to download 
-      user.table <- userData()
+      if (!is.null(input$userAnnot)){
+        user.table <- userData()
+      }else{
+        user.table <- dataOut() 
+      }
       
       # add columns for synapse projects 
       first.cols <- c("synapseId", "fileName")
       
-      # extract a unique key to deine the manifest columns
+      # extract a unique key to define the manifest columns
       user.cols <- unique(user.table[["key"]])
       
       # create the manifest schema 
