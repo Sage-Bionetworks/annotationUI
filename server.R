@@ -159,13 +159,13 @@ server <- function(input, output, session) {
       }
       
       # add columns for synapse projects 
-      first.cols <- c("synapseId", "fileName")
+      first.cols <- c("id", "name", "parent")
       
       # extract a unique key to define the manifest columns
       user.cols <- unique(user.table[["key"]])
       
       # create the manifest schema 
-      columns <- append(c("synapseId", "fileName"), user.cols)
+      columns <- append(c("id", "name", "parent"), user.cols)
       schema <- data.frame(matrix(ncol = length(columns), nrow = 0))
       colnames(schema) <- columns
       
