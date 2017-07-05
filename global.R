@@ -52,5 +52,5 @@ all.vars <- names(dat)
 names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "source", "project")
 
 # Render latest github release version in title from synapseAnnotations repo
-release.version <- gsub(".*/", "", system("git ls-remote --tags https://github.com/Sage-Bionetworks/synapseAnnotations", intern = TRUE)[[3]])
+release.version <- gsub(".*/", "", system("git ls-remote --tags https://github.com/Sage-Bionetworks/synapseAnnotations", intern = TRUE)[[4]])
 
