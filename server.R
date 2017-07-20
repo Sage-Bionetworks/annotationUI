@@ -171,6 +171,7 @@ server <- function(input, output, session) {
       
       # create the key and key-value description dataframes
       key.description <- user.table[,c("key", "description", "columnType", "project")]
+      key.description <- key.description[!duplicated(key.description),]
       value.description <- user.table[,c("key", "value", "valueDescription", "source", "project")]
       
       # create three sheets including: 
