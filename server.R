@@ -172,8 +172,9 @@ server <- function(input, output, session) {
       # create the key and key-value description dataframes
       key.description <- user.table[,c("key", "description", "columnType", "project")]
       key.description <- key.description[!duplicated(key.description),]
+      key.description <- key.description[order(key.description$project),]
       value.description <- user.table[,c("key", "value", "valueDescription", "source", "project")]
-      
+      value.description <- value.description[order(value.description$project),]
       # create three sheets including: 
       #     1. manifest columns 
       #     2. key descriptions 
