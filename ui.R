@@ -29,6 +29,15 @@ sidebar <- dashboardSidebar(
               "right"),
     tags$hr()
   ),
+  # Long list requires scrolling or CSS widgets to controll the length 
+  # possible collisions with category 
+  # sidebarMenu(id = "valueCategory",
+  #   checkboxGroupInput("keyCat", "Values",
+  #                       choiceNames = value,
+  #                       choiceValues = value,
+  #                       selected = value),
+  #   tags$hr()
+  # ),
   sidebarMenu(id = "upload",
     # menuItem("Upload annotations", tabName = "Upload annotations", icon = icon("info")),
     p(strong("Upload Your Project's Annotations"), align = "center"), 
