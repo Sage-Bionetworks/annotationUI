@@ -44,7 +44,7 @@ options(stringsAsFactors = FALSE)
 
 # by replacing the global dat variable
 # you may use this app using the standard schema but your own melted data 
-queryResult <- synTableQuery('select * from syn10242802')
+queryResult <- synTableQuery('select * from syn10242922')
 dat <- as.data.frame(queryResult@values)
 
 categories <- lapply(unique(dat$project), function(x) {x})
