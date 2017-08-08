@@ -10,12 +10,12 @@ server <- function(input, output, session) {
   dataOut <- reactive({
     
     validate(
-      need(length(input$cat) != 0, "Select a Sage Bionetworks project.\n\n You may also upload your annotations to download a manifest. \n\n ")
+      need(length(input$cat) != 0, "Select a Sage Bionetworks module.\n\n You may also upload your annotations to download a manifest. \n\n ")
     )
     
     if (length(input$cat) > 0) {
       # filter by user-defined project category 
-      data.output <- dat[which(dat$project %in% input$cat),]
+      data.output <- dat[which(dat$module %in% input$cat),]
       data.output
     }
     else{
@@ -36,7 +36,7 @@ server <- function(input, output, session) {
  
     # check if project name exists 
     validate(
-      need(user.project, "Please enter your projects name. \n\n ")
+      need(user.project, "Please enter your module name. \n\n ")
     )
     
     # Trim whitespaces in project name
@@ -129,7 +129,7 @@ server <- function(input, output, session) {
     }
     
     # pass in projects name
-    final.dat[ ,"project"] <- user.project
+    final.dat[ ,"module"] <- user.project
     
     if (length(input$cat) != 0) {
       final.dat <- rbind(dataOut(), final.dat)
@@ -170,11 +170,11 @@ server <- function(input, output, session) {
       colnames(schema) <- columns
       
       # create the key and key-value description dataframes
-      key.description <- user.table[,c("key", "description", "columnType", "project")]
+      key.description <- user.table[,c("key", "description", "columnType", "module")]
       key.description <- key.description[!duplicated(key.description),]
-      key.description <- key.description[order(key.description$project),]
-      value.description <- user.table[,c("key", "value", "valueDescription", "source", "project")]
-      value.description <- value.description[order(value.description$project),]
+      key.description <- key.description[order(key.description$module),]
+      value.description <- user.table[,c("key", "value", "valueDescription", "source", "module")]
+      value.description <- value.description[order(value.description$module),]
       # create three sheets including: 
       #     1. manifest columns 
       #     2. key descriptions 

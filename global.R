@@ -47,12 +47,12 @@ options(stringsAsFactors = FALSE)
 queryResult <- synTableQuery('select * from syn10242922')
 dat <- as.data.frame(queryResult@values)
 
-categories <- lapply(unique(dat$project), function(x) {x})
+categories <- lapply(unique(dat$module), function(x) {x})
 key <- unique(dat$key)
 value <- unique(dat$value)
 
 all.vars <- names(dat)
-names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "source", "project")
+names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "source", "module")
 
 # Render latest github release version in title from synapseAnnotations repo
 versions <- system("git ls-remote --tags https://github.com/Sage-Bionetworks/synapseAnnotations", intern = TRUE)
