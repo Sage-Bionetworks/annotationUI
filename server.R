@@ -51,7 +51,7 @@ server <- function(input, output, session) {
       need(c("key", "value") %in% colnames(user.dat), "Please provide key and value fields in your csv")
     )
     
-    standard.sage.colnames <- c("description", "columnType", "maximumSize", "valueDescription", "source", "project")
+    standard.sage.colnames <- c("description", "columnType", "maximumSize", "valueDescription", "source", "module")
     columns <- which(colnames(user.dat) %in% standard.sage.colnames)
     
     if (length(columns) == 0) {
