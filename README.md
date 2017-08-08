@@ -62,11 +62,24 @@ You can clone or fork this repo and host the app on a private or [shiny server](
 3. Annotate your files on synapse using annotation utils functions (update or audit annotations). 
 
 repeat ...
-### Run the app locally 
+### Run the app locally  
+
+First
+
+1. Register to synapse and create your username and password 
+2. Download synapse 
+3. Cache your login credentials
+
+See http://docs.synapse.org/articles/getting_started.html for detailed instructions. 
+
+Then you can run 
+
 ```R
 if (!require('shiny')) install.packages("shiny")
 shiny::runGitHub('Sage-Bionetworks/annotationUI')
 ```
+Given the list of dependencies below. 
+
 ## Dependendencies 
 #### Session info 
 ------------------------------------------------------------------------------------------
