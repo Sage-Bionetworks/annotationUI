@@ -54,7 +54,7 @@ value <- unique(dat$value)
 all.vars <- names(dat)
 names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "source", "module")
 
-# Render latest github release version in title from synapseAnnotations repo
-versions <- system("git ls-remote --tags https://github.com/Sage-Bionetworks/synapseAnnotations", intern = TRUE)
-release.version <- gsub(".*/", "", versions[[length(versions)]])
+# Get release version from syanpe table annotations
+table <- synGet("syn10242922")
+release.version <- annotations(table)$annotationReleaseVersion
 
