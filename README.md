@@ -54,7 +54,8 @@ Replacing the **dat** variable in `global.R` would allow for users to re-define 
 You can clone or fork this repo and host the app on a private or [shiny server](https://www.rstudio.com/products/shiny/shiny-server/)
 
 ### Modular agile flow 
-![alt tag](img/agile-flow.png)
+<img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/agile-flow.png" width="500px" height="400px" />
+
 1. Define consensus annotations with definitions and source meta data (Format = versioned json files). 
 
 2. Build your projects’ manifest using a User Interface (UI).
