@@ -30,15 +30,15 @@ The app could parse inputs with having one row per unique value (one to one rela
 
 key |value 
 --- | ---
-diagnosis | AML / Acute Myeloid Leukemia 
-diagnosis | SecAML / Secondary AML 
-diagnosis | CML / Chronic Myeloid Leukemia
+diagnosis | Acute Myeloid Leukemia 
+diagnosis | Secondary AML 
+diagnosis | Chronic Myeloid Leukemia
 
 or one row per unique keys and a comma separated list of values (one to many relations) ex.
 
 key |value 
 --- | ---
-diagnosis | AML / Acute Myeloid Leukemia , SecAML / Secondary AML , CML / Chronic Myeloid Leukemia
+diagnosis | Acute Myeloid Leukemia , Secondary AML , Chronic Myeloid Leukemia
 
 
 ### Data release information 
