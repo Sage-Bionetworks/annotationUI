@@ -39,11 +39,11 @@ You can filter the annotations modules that you need by selecting and deselectin
 You can add your own projects' annotations to the existing annotation modules. 
 
 1. Make sure that your projects's annotations module have the minimal fields/columns, _key_ and _value_ with rows formated as:  
-a. A key and it's associated values as a comma seperated list: <img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/format1.png" width="700px" height="100px" />
+a. A key and it's associated values as a comma seperated list: <img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/format1.png" width="700px" height="300px" />
 
 <br>
 
-b. A key and a value in each row with repeating keys for those whom have multiple values: <img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/format2.png" width="700px" height="100px" />
+b. A key and a value in each row with repeating keys for those whom have multiple values: <img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/format2.png" width="700px" height="300px" />
 
 <br>
 
@@ -88,5 +88,5 @@ For more information please visit: https://github.com/Sage-Bionetworks/synapseAn
 
 <br>
 
-<img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/releaseVersion.png" width="200px" height="400px" />
+<img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/releaseVersion.png" width="400px" height="400px" />
 
