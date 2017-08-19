@@ -4,7 +4,7 @@
 
 ### What is a manifest? 
 
-<img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/manifest.png" width="300px" height="300px" />
+<img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/manifest.png" width="300px" height="270px" />
 
 <hr/>
 
@@ -39,7 +39,7 @@ You can filter the annotations modules that you need by selecting and deselectin
 You can add your own projects' annotations to the existing annotation modules. 
 
 1. Make sure that your projects's annotations module have the minimal fields/columns, _key_ and _value_ with rows formated as:  
-a. A key and it's associated values as a comma seperated list: <img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/format1.png" width="700px" height="300px" />
+a. A key and it's associated values as a comma seperated list: <img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/format1.png" width="700px" height="300px" />  
 b. A key and a value in each row with repeating keys for those whom have multiple values: <img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/format2.png" width="700px" height="300px" />
 
 <br>
