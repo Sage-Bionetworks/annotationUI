@@ -2,30 +2,31 @@
 ### Why annotations?
 <img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/basics.png" width="500px" height="400px" />
 
-</br>
-
 ### What is a manifest? 
 
 <img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/manifest.png" width="300px" height="300px" />
 
-</br>
+<hr/>
 
 ## How to Construct a Synapse Annotation Manifest
 
-### Search and find 
+### Search and Find 
   
 Search table globally, top search box, or by field(s)/column(s), bottom search boxes.  
+</br>
 
 ![](../img/search1.png)
 <br>
   
 and find the modules containing the annotations that you need for your project (ex. searching by column)  
 
+</br>
+
 ![](../img/search2.png)
 
 <hr/>
 
-### Select Sage Bionetworks projects  
+### Select Sage Bionetworks Modules  
 
 You can filter the annotations modules that you need by selecting and deselecting the modules' category checkboxes. Note that the module categories only list Sage Bionetworks annotations that have gone through extensive standardization procedures through scientists.  
 
@@ -33,13 +34,18 @@ You can filter the annotations modules that you need by selecting and deselectin
 
 <hr/>
 
-### Add annotations for manifest construction  
+### Add Annotations for Manifest Construction  
 
 You can add your own projects' annotations to the existing annotation modules. 
 
 1. Make sure that your projects's annotations module have the minimal fields/columns, _key_ and _value_ with rows formated as:  
-a. A key and it's associated values as a comma seperated list: ![](../img/format1.png)
-b. A key and a value in each row with repeating keys for those whom have multiple values: ![](../img/format2.png)
+a. A key and it's associated values as a comma seperated list: <img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/format1.png" width="700px" height="100px" />
+
+<br>
+
+b. A key and a value in each row with repeating keys for those whom have multiple values: <img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/format2.png" width="700px" height="100px" />
+
+<br>
 
 _Note: This data would only exist on your platform's session for user-defined manifest construction purposes._  
 
@@ -47,11 +53,14 @@ _Note: This data would only exist on your platform's session for user-defined ma
 
 ![](../img/add1.png)
 
+<br>
 
 3. upload your annotations' csv file.  
 _NOTE: you must provide a comma seperated csv file._
 
 ![](../img/add2.png)
+
+<br>
 
 4. you will see a message after your annotations upload has been completed with no errors.
 
@@ -59,7 +68,7 @@ _NOTE: you must provide a comma seperated csv file._
 
 <hr/>
 
-### Download manifest
+### Download Manifest
 
 Finally you can download the manifest containing the annotations modules. 
 on each manifest you will find three excel sheets. 
@@ -71,9 +80,13 @@ on each manifest you will find three excel sheets.
 
 <hr/>
 
-### Release versions 
+### Annotation Module's Data Release Versions 
 
 Sage Bionetworks annotations have release versions with the latest version being indicated on the shiny app title. Users are encouraged to place the used version number on their synapse projects’ annotation. This will enable auditing the annotations over time fairly easily.
 
-![](../img/releaseVersion.png)
+For more information please visit: https://github.com/Sage-Bionetworks/synapseAnnotations/blob/master/README.md 
+
+<br>
+
+<img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/releaseVersion.png" width="200px" height="400px" />
 
