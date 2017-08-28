@@ -9,9 +9,9 @@ server <- function(input, output, session) {
   # render function creates the type of output
   dataOut <- reactive({
     
-    validate(
-      need(length(input$cat) != 0, "Select a Sage Bionetworks module.\n\n You may also upload your annotations to download a manifest. \n\n ")
-    )
+    #validate(
+    #  need(length(input$cat) != 0, "Select a Sage Bionetworks module.\n\n You may also upload your annotations to download a manifest. \n\n ")
+    #)
     
     if (length(input$cat) > 0) {
       # filter by user-defined project category 
@@ -26,6 +26,11 @@ server <- function(input, output, session) {
   userData <- reactive({
     
     file <- input$userAnnot
+    
+    # check if file exists 
+    validate(
+      need(file, "Your csv file can't be located. Please try again! \n\n ")
+    )
     
     user.project <- input$projectName
  
@@ -182,6 +187,7 @@ server <- function(input, output, session) {
   output$downloadJSON <- downloadHandler(
     
     filename <- function() {'annotations.json'},
+    
     content <- function(file) {
       # get user-defined table to download 
       if (!is.null(input$userAnnot)) {
@@ -224,7 +230,6 @@ server <- function(input, output, session) {
           rownames(key) <- NULL
           return(key)
         })
-        nested.value.list <- compact(nested.value.list)
         nv <- do.call(rbind, nested.value.list)
         return(nv)
       })
