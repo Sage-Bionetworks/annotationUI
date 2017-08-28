@@ -184,6 +184,62 @@ server <- function(input, output, session) {
     }
   )
   
+  output$downloadJSON <- downloadHandler(
+    
+    filename <- function() {'annotations.json'},
+    content <- function(file) {
+      # get user-defined table to download 
+      if (!is.null(input$userAnnot)) {
+        user.table <- userData()
+      }else{
+        user.table <- dataOut() 
+      }
+      
+      user.table <- as.data.frame(user.table, stringsAsFactors = F)
+      nested.list  <- lapply(unique(user.table$module), function(m){
+        
+        this.module <- dat[which(user.table$module %in% m),]
+        
+        each.key.slice <- lapply(unique(this.module$key), function(k){
+          this.key <- dat[which(dat$key %in% k),]
+          return(this.key)
+        })
+        
+        nested.value.list <- lapply(each.key.slice, function(v){
+          # replace NA's with empty string
+          v[is.na(v)] <- ""
+          
+          # select the value metadata columns
+          enumValue <- dplyr::select(v, value, valueDescription, source)
+          names(enumValue)[2] <- "description"
+          # removes _row 
+          rownames(enumValue) <- NULL
+          enumValue.json <- toJSON(enumValue, pretty = T)
+          
+          # select the key metadata columns
+          key <- dplyr::select(v, key, description, columnType, maximumSize)
+          # replace key with name to match json
+          names(key)[1] <- "name"
+          key$enumValue <- ""
+          # only need one unique key row
+          key <- key[1, ]
+          
+          key$enumValue <- list(enumValue)
+          # removes _row 
+          rownames(key) <- NULL
+          return(key)
+        })
+        nested.value.list <- compact(nested.value.list)
+        nv <- do.call(rbind, nested.value.list)
+        return(nv)
+      })
+      
+      all.modules <- do.call(rbind, nested.list)
+      all.modules.json <- jsonlite::toJSON(all.modules , pretty = T)
+      writeLines(all.modules.json, file)
+    }
+  )
+    
   # allow refresh to run locally without a server 
   # session$allowReconnect("force")
   

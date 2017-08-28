@@ -13,7 +13,8 @@
 body <- dashboardBody(
   fluidRow(
       shiny::dataTableOutput('annotationTable'), 
-      downloadButton('downloadSchema', 'Download Manifest')
+      downloadButton('downloadSchema', 'Download Manifest'),
+      downloadButton('downloadJSON', 'Download JSON')
   )
 )
 
