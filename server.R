@@ -27,11 +27,6 @@ server <- function(input, output, session) {
     
     file <- input$userAnnot
     
-    # check if file exists 
-    validate(
-      need(file, "Your csv file can't be located. Please try again! \n\n ")
-    )
-    
     user.project <- input$projectName
  
     # check if project name exists 
