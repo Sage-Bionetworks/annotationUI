@@ -217,21 +217,20 @@ server <- function(input, output, session) {
           v[is.na(v)] <- ""
           
           # select the value metadata columns
-          enumValue <- dplyr::select(v, value, valueDescription, source)
-          names(enumValue)[2] <- "description"
+          enumValues <- dplyr::select(v, value, valueDescription, source)
+          names(enumValues)[2] <- "description"
           # removes _row 
-          rownames(enumValue) <- NULL
-          enumValue.json <- toJSON(enumValue, pretty = T)
+          rownames(enumValues) <- NULL
+          enumValues.json <- toJSON(enumValues, pretty = T)
           
           # select the key metadata columns
           key <- dplyr::select(v, key, description, columnType, maximumSize)
           # replace key with name to match json
           names(key)[1] <- "name"
-          key$enumValue <- ""
           # only need one unique key row
           key <- key[1, ]
           
-          key$enumValue <- list(enumValue)
+          key$enumValues <- list(enumValues)
           # removes _row 
           rownames(key) <- NULL
           return(key)
