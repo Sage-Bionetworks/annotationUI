@@ -9,9 +9,9 @@ server <- function(input, output, session) {
   # render function creates the type of output
   dataOut <- reactive({
     
-    #validate(
-    #  need(length(input$cat) != 0, "Select a Sage Bionetworks module.\n\n You may also upload your annotations to download a manifest. \n\n ")
-    #)
+    validate(
+      need(length(input$cat) != 0, "Select a Sage Bionetworks module.\n\n You may also upload your annotations to download a manifest. \n\n ")
+    )
     
     if (length(input$cat) > 0) {
       # filter by user-defined project category 
@@ -149,7 +149,7 @@ server <- function(input, output, session) {
   
   output$downloadSchema <- downloadHandler(
     filename <- function() {'annotations_manifest.xlsx'},
-    content <- function(file) {
+    content <- function(filename) {
       
       # get user-defined table to download 
       if (!is.null(input$userAnnot)){
@@ -180,7 +180,7 @@ server <- function(input, output, session) {
       #     2. key descriptions 
       #     3. value descriptions (key-value)
       sheets <- list(manifest = schema , keyDescription = key.description, keyValueDescription = value.description)
-      openxlsx::write.xlsx(sheets, file)
+      openxlsx::write.xlsx(sheets, filename)
     }
   )
   
@@ -188,7 +188,8 @@ server <- function(input, output, session) {
     
     filename <- function() {'annotations.json'},
     
-    content <- function(file) {
+    content <- function(filename) {
+      
       # get user-defined table to download 
       if (!is.null(input$userAnnot)) {
         user.table <- userData()
@@ -199,10 +200,10 @@ server <- function(input, output, session) {
       user.table <- as.data.frame(user.table, stringsAsFactors = F)
       nested.list  <- lapply(unique(user.table$module), function(m){
         
-        this.module <- dat[which(user.table$module %in% m),]
+        this.module <- user.table[which(user.table$module %in% m),]
         
         each.key.slice <- lapply(unique(this.module$key), function(k){
-          this.key <- dat[which(dat$key %in% k),]
+          this.key <- user.table[which(user.table$key %in% k),]
           return(this.key)
         })
         
@@ -236,7 +237,7 @@ server <- function(input, output, session) {
       
       all.modules <- do.call(rbind, nested.list)
       all.modules.json <- jsonlite::toJSON(all.modules , pretty = T)
-      writeLines(all.modules.json, file)
+      writeLines(all.modules.json, filename)
     }
   )
     
