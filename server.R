@@ -9,17 +9,17 @@ server <- function(input, output, session) {
   # render function creates the type of output
   dataOut <- reactive({
     
-    #validate(
-    # need(length(input$cat) != 0, "Select a Sage Bionetworks module.\n\n You may also upload your annotations to download a manifest. \n\n ")
-    #)
-    
     if (length(input$cat) > 0) {
       # filter by user-defined project category 
-      data.output <- dat[which(dat$module %in% input$cat),]
-      data.output
-    }
-    else{
-      data.output
+      dat[which(dat$module %in% input$cat),]
+    }else{
+      if (length(input$cat) == 0) {
+        shiny::validate(
+          need(length(input$cat) != 0, "Select a Sage Bionetworks module.\n\n You may also upload your annotations to download a manifest. \n\n ")
+        )
+      }else{
+        dat
+      }
     }
   })
  
@@ -28,16 +28,16 @@ server <- function(input, output, session) {
     file <- input$userAnnot
     
     # check if file exists 
-    #validate(
-    #  need(file, "Your csv file can't be located. Please try again! \n\n ")
-    #)
+    shiny::validate(
+      need(file, "Your csv file can't be located. Please try again! \n\n ")
+    )
     
     user.project <- input$projectName
  
     # check if project name exists 
-    #validate(
-    #  need(user.project, "Please enter your module name. \n\n ")
-    #)
+    shiny::validate(
+      need(user.project, "Please enter your module name. \n\n ")
+    )
     
     # Trim whitespaces in project name
     user.project <- trimws(user.project)
@@ -47,9 +47,9 @@ server <- function(input, output, session) {
     user.dat <-  fread(file$datapath, encoding = "UTF-8", fill = TRUE, blank.lines.skip = TRUE, na.strings = c("",NA,"NULL") , data.table = FALSE)
     
     # then check for standard input columns 
-    #validate(
-    #  need(c("key", "value") %in% colnames(user.dat), "Please provide key and value fields in your csv")
-    #)
+    shiny::validate(
+      need(c("key", "value") %in% colnames(user.dat), "Please provide key and value fields in your csv")
+    )
     
     standard.sage.colnames <- c("description", "columnType", "maximumSize", "valueDescription", "source", "module")
     columns <- which(colnames(user.dat) %in% standard.sage.colnames)
@@ -137,12 +137,17 @@ server <- function(input, output, session) {
     }else{
       final.dat
     }
-    
+
   })
 
   output$annotationTable <- shiny::renderDataTable({
   
-    dataOut() 
+    if (!is.null(input$userAnnot)) {
+      table <- userData()
+    }else{
+      table <- dataOut() 
+    }
+    table
   
   },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 5, scrollX = TRUE, style = 'overflow-x: auto'))
   
