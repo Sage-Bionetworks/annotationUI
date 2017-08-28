@@ -9,9 +9,9 @@ server <- function(input, output, session) {
   # render function creates the type of output
   dataOut <- reactive({
     
-   # validate(
-   #  need(length(input$cat) != 0, "Select a Sage Bionetworks module.\n\n You may also upload your annotations to download a manifest. \n\n ")
-   # )
+    validate(
+     need(length(input$cat) != 0, "Select a Sage Bionetworks module.\n\n You may also upload your annotations to download a manifest. \n\n ")
+    )
     
     if (length(input$cat) > 0) {
       # filter by user-defined project category 

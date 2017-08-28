@@ -55,6 +55,7 @@ value <- unique(dat$value)
 
 all.vars <- names(dat)
 names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "source", "module")
+dat <- dat %>% mutate_all(as.character)
 
 # Get release version from syanpe table annotations
 table <- synGet("syn10242922")
