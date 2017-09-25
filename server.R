@@ -230,6 +230,10 @@ server <- function(input, output, session) {
           # only need one unique key row
           key <- key[1, ]
           
+          if (key$columnType == "BOOLEAN") {
+            enumValues$value <- as.logical(enumValues$value)
+          }
+          
           key$enumValues <- list(enumValues)
           # removes _row 
           rownames(key) <- NULL
