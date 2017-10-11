@@ -12,7 +12,7 @@
 # https://rstudio.github.io/shinydashboard/structure.html
 body <- dashboardBody(
   fluidRow(
-      DT::dataTableOutput('annotationTable'), 
+      dataTableOutput('annotationTable'), 
       downloadButton('downloadSchema', 'Download Manifest'),
       downloadButton('downloadJSON', 'Download JSON')
   )

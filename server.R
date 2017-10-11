@@ -140,7 +140,7 @@ server <- function(input, output, session) {
 
   })
 
-  output$annotationTable <- DT::renderDataTable({
+  output$annotationTable <- renderDataTable({
    
     if (!is.null(input$userAnnot)) {
       table <- userData()
@@ -148,8 +148,10 @@ server <- function(input, output, session) {
       table <- dataOut() 
     }
     table
+    # loging output for debugging 
+    print(head(table))
     
-  },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 10, scrollX = TRUE, style = 'overflow-x: auto'), selection = list(target = 'row'), rownames = FALSE, server = FALSE) 
+  },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 10, scrollX = TRUE), selection = list(target = 'row'), rownames = FALSE) 
                                                                                                                                   
   
   output$downloadSchema <- downloadHandler(
