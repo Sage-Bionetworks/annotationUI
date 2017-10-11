@@ -149,7 +149,7 @@ server <- function(input, output, session) {
     }
     table
   
-  },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 10, scrollX = TRUE, style = 'overflow-x: auto'), selection = list(target = 'row'), rownames = FALSE) 
+  },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 10, scrollX = TRUE, style = 'overflow-x: auto'), selection = list(target = 'row'), rownames = FALSE, server = FALSE) 
                                                                                                                                   
   
   output$downloadSchema <- downloadHandler(
@@ -171,7 +171,7 @@ server <- function(input, output, session) {
       if (!is.null(input$annotationTable_rows_selected)) {
         
         user.cols <- unique(user.table[input$annotationTable_rows_selected, 'key'])
-        user.table <- user.table[which(user.table$key  %in% user.cols), ]
+        user.table <- user.table[which(user.table$key %in% user.cols), ]
         
       }else{
         
