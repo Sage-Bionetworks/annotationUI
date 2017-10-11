@@ -151,7 +151,7 @@ server <- function(input, output, session) {
     # loging output for debugging 
     print(head(table))
     
-  },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 10, scrollX = TRUE), selection = list(target = 'row'), rownames = FALSE) 
+  },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 10, scrollX = TRUE), rownames = FALSE) 
                                                                                                                                   
   
   output$downloadSchema <- downloadHandler(
