@@ -140,7 +140,7 @@ server <- function(input, output, session) {
 
   })
 
-  output$annotationTable <- renderDataTable({
+  output$annotationTable <- DT::renderDataTable({
    
     if (!is.null(input$userAnnot)) {
       table <- userData()
