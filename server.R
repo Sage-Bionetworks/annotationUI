@@ -140,7 +140,7 @@ server <- function(input, output, session) {
 
   })
 
-  output$annotationTable <- shiny::renderDataTable({
+  output$annotationTable <- DT::renderDataTable({
   
     if (!is.null(input$userAnnot)) {
       table <- userData()
@@ -149,7 +149,8 @@ server <- function(input, output, session) {
     }
     table
   
-  },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 5, scrollX = TRUE, style = 'overflow-x: auto'))
+  },options = list(lengthMenu = c(2, 5, 10, 50, 100, 1000), pageLength = 5, scrollX = TRUE, style = 'overflow-x: auto'), selection = list(target = 'row'), rownames = FALSE) 
+                                                                                                                                  
   
   
   output$downloadSchema <- downloadHandler(
@@ -157,20 +158,29 @@ server <- function(input, output, session) {
     content <- function(filename) {
       
       # get user-defined table to download 
-      if (!is.null(input$userAnnot)){
+      if (!is.null(input$userAnnot)) {
         user.table <- userData()
+        
       }else{
         user.table <- dataOut() 
       }
       
       # add columns for synapse projects 
-      first.cols <- c("id", "name", "parent")
+      first.cols <- c("path", "parent", "name", "used", "executed")
       
       # extract a unique key to define the manifest columns
-      user.cols <- unique(user.table[["key"]])
+      if (!is.null(input$annotationTable_rows_selected)) {
+        
+        user.cols <- unique(user.table[input$annotationTable_rows_selected, 'key'])
+        user.table <- user.table[which(user.table$key  %in% user.cols), ]
+        
+      }else{
+        
+        user.cols <- unique(user.table[["key"]])
+      }
       
       # create the manifest schema 
-      columns <- append(c("id", "name", "parent"), user.cols)
+      columns <- append(c("path", "parent", "name", "used", "executed"), user.cols)
       schema <- data.frame(matrix(ncol = length(columns), nrow = 0))
       colnames(schema) <- columns
       
