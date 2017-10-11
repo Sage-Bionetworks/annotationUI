@@ -149,7 +149,7 @@ server <- function(input, output, session) {
     }
     table
     
-  },options = list(pageLength = 10, lengthMenu = c(5, 10, 50, 100, 1000), scrollX = TRUE), rownames = FALSE) 
+  },options = list(pageLength = 10, lengthMenu = c(5, 10, 50, 100, 1000), style = 'overflow-x: auto'), rownames = FALSE) 
                                                                                                                                   
   
   output$downloadSchema <- downloadHandler(
