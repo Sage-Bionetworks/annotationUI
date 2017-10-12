@@ -168,7 +168,7 @@ server <- function(input, output, session) {
       first.cols <- c("path", "parent", "name", "used", "executed")
       
       # extract a unique key to define the manifest columns
-      if (!is.null(input$annotationTable_rows_selected)) {
+      if (length(input$annotationTable_rows_selected)) {
         
         user.cols <- unique(user.table[input$annotationTable_rows_selected, 'key'])
         user.table <- user.table[which(user.table$key %in% user.cols), ]
