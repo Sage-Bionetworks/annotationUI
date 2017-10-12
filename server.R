@@ -211,6 +211,14 @@ server <- function(input, output, session) {
         user.table <- dataOut() 
       }
       
+      # extract selected rows keys to slice the dataframe
+      if (length(input$annotationTable_rows_selected)) {
+        
+        user.cols <- unique(user.table[input$annotationTable_rows_selected, 'key'])
+        user.table <- user.table[which(user.table$key %in% user.cols), ]
+
+      }
+      
       user.table <- as.data.frame(user.table, stringsAsFactors = F)
       nested.list  <- lapply(unique(user.table$module), function(m){
         
