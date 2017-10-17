@@ -47,6 +47,15 @@ diagnosis | Acute Myeloid Leukemia , Secondary AML , Chronic Myeloid Leukemia
 [Version format and use](https://github.com/Sage-Bionetworks/synapseAnnotations/blob/master/README.md)
 
 ### Use-case documentation 
+#### simple steps 
+1. Use the global search box to search the entire table for the desired keywords. This will find results in all columns.
+2. Select the modules that you need to subset data and get the desired final annotation table.
+3. Add your own projects' annotations, given the same schema or with the minimum columns `key` and `value`. See detailed instuctions in `vignettes`
+4. You may expand the table view by selecting higher number of rows to be shown.
+5. Select/highlight a row with the keys that you'd like. You don't have to select all the rows. Just one row with the desired key would do the trick.
+6. Finally, download the manifest or Json structure of the filtered annotations. 
+
+#### detailed steps
 `vignettes` folder contains an R markdown with instructive tutorials demonstrating practical uses of the annotationUI shiny app. 
 
 ### How to use on a different server 
@@ -54,7 +63,7 @@ Replacing the **dat** variable in `global.R` would allow for users to re-define 
 You can clone or fork this repo and host the app on a private or [shiny server](https://www.rstudio.com/products/shiny/shiny-server/)
 
 ### Modular agile flow 
-<img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/agile-flow.png" width="500px" height="400px" />
+<img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/agile-flow.png" width="450px" height="400px" />
 
 1. Define consensus annotations with definitions and source meta data (Format = versioned json files). 
 
