@@ -44,7 +44,7 @@ server <- function(input, output, session) {
     
     # Upload user annotaions 
     # Use fread function to catch user defined formats, handle large files, and execute correct errors as needed
-    user.dat <-  fread(file$datapath, encoding = "UTF-8", fill = TRUE, blank.lines.skip = TRUE, na.strings = c("",NA,"NULL") , data.table = FALSE)
+    user.dat <-  data.table::fread(file$datapath, encoding = "UTF-8", fill = TRUE, blank.lines.skip = TRUE, na.strings = c("",NA,"NULL") , data.table = FALSE)
     
     # then check for standard input columns 
     # shiny::validate(

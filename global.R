@@ -15,6 +15,7 @@ usePackage("ggplot2")
 usePackage("openxlsx")
 usePackage("shinydashboard")
 usePackage("jsonlite")
+usePackage("data.table")
 usePackage("DT")
 
 # source('http://depot.sagebase.org/CRAN.R')
@@ -31,6 +32,7 @@ library(openxlsx)
 library(jsonlite)
 library(synapseClient)
 library(shinydashboard)
+library(data.table)
 library(DT)
 # ----------------------------------------------------------------------
 # login to synapse 
