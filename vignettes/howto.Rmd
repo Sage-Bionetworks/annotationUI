@@ -48,32 +48,43 @@ _Note: This data would only exist on your platform's session for user-defined ma
 
 2. Then you must provide your projects' name by typing it in the _text box_. 
 
-![](../img/add1.png)
+![](../img/upload1.png)
 
 <br>
 
-3. upload your annotations' csv file.  
+3. upload your annotations' csv file. you will see a message after your annotations upload has been completed with no errors.
 _NOTE: you must provide a comma seperated csv file._
 
-![](../img/add2.png)
-
+![](../img/upload2.png)
 <br>
 
-4. you will see a message after your annotations upload has been completed with no errors.
+<hr/>
 
-![](../img/add3.png)
+### Select Key(s)
+
+From your final table, expand the table to see all the keys. Then select the keys (and all it's associated values) by highlighting rows. One row per key would do the trick. 
+
+![](../img/selectKeys.png)
 
 <hr/>
 
 ### Download Manifest
 
-Finally you can download the manifest containing the annotations modules. 
+You can download the manifest containing the annotations modules. 
 on each manifest you will find three excel sheets. 
 1. The first sheet is for updating annotations on synapse. 
 2. The second sheet is the dictionary for keys. 
 3. The third sheet is the dictionary for values. 
 
-![](../img/download.png)
+![](../img/downloadManifest.png)
+
+<hr/>
+
+### Download Json
+
+You can also download the annotations you choose in Json format. 
+
+![](../img/downloadJson.png)
 
 <hr/>
 
@@ -85,5 +96,5 @@ For more information please visit: https://github.com/Sage-Bionetworks/synapseAn
 
 <br>
 
-<img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/releaseVersion.png" width="400px" height="400px" />
+<img src="https://github.com/Sage-Bionetworks/annotationUI/blob/master/img/release.png" width="400px" height="400px" />
 
