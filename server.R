@@ -251,6 +251,9 @@ server <- function(input, output, session) {
             enumValues$value <- as.logical(enumValues$value)
           }
           
+          # remove all empty enumvalues 
+          enumValues <- enumValues[!(enumValues$value == "" & enumValues$description == "" & enumValues$source == ""), ]
+          
           key$enumValues <- list(enumValues)
           # removes _row 
           rownames(key) <- NULL
