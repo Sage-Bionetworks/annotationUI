@@ -7,6 +7,13 @@
 server <- function(input, output, session) {
   # use the same name from output functions in ui
   # render function creates the type of output
+  observe({
+    updateCheckboxGroupInput(
+      session, 'cat', choices = categories,
+      selected = if (!input$allNone) categories 
+    )
+  })
+  
   dataOut <- reactive({
     
     if (length(input$cat) > 0) {

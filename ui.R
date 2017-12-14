@@ -28,6 +28,7 @@ sidebar <- dashboardSidebar(
                        selected = categories),
     bsTooltip("projectCategory", "Select the modules \\ that contain the annotations \\ required for your project",
               "right"),
+    checkboxInput('allNone', 'All/None'),
     tags$hr()
   ),
   # Long list requires scrolling or CSS widgets to controll the length 
