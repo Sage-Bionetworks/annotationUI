@@ -93,60 +93,25 @@ Given the list of dependencies below.
 ## Dependendencies 
 #### Session info 
 ------------------------------------------------------------------------------------------
- setting  value                       
- version  R version 3.3.2 (2016-10-31)
- system   x86_64, darwin13.4.0        
- ui       RStudio (1.0.136)           
- language (EN)                        
- collate  en_US.UTF-8                 
- tz       America/Los_Angeles                          
+```R
+R version 3.4.3 (2017-11-30)
+Running under: macOS Sierra 10.12.6
 
-#### Packages 
-----------------------------------------------------------------------------------------------
- package        * version  date       source                                          
- assertthat       0.2.0    2017-04-11 CRAN (R 3.3.2)                                  
- base           * 3.3.2    2016-10-31 local                                           
- bindr            0.1      2016-11-13 CRAN (R 3.3.2)                                  
- bindrcpp         0.2      2017-06-17 CRAN (R 3.3.2)                                  
- bitops           1.0-6    2013-08-17 CRAN (R 3.3.0)                                  
- colorspace       1.3-2    2016-12-14 CRAN (R 3.3.2)                                  
- data.table     * 1.10.4   2017-02-01 CRAN (R 3.3.2)                                  
- datasets       * 3.3.2    2016-10-31 local                                           
- devtools       * 1.13.2   2017-06-02 CRAN (R 3.3.2)                                  
- digest           0.6.12   2017-01-27 CRAN (R 3.3.2)                                  
- dplyr          * 0.7.1    2017-06-22 CRAN (R 3.3.2)                                  
- ggplot2        * 2.2.1    2016-12-30 CRAN (R 3.3.2)                                  
- glue             1.1.1    2017-06-21 CRAN (R 3.3.2)                                  
- graphics       * 3.3.2    2016-10-31 local                                           
- grDevices      * 3.3.2    2016-10-31 local                                           
- grid             3.3.2    2016-10-31 local                                           
- gtable           0.2.0    2016-02-26 CRAN (R 3.3.0)                                  
- htmltools        0.3.6    2017-04-28 CRAN (R 3.3.2)                                  
- httpuv           1.3.5    2017-07-04 CRAN (R 3.3.2)                                  
- jsonlite         1.5      2017-06-01 CRAN (R 3.3.2)                                  
- lazyeval         0.2.0    2016-06-12 CRAN (R 3.3.0)                                  
- magrittr         1.5      2014-11-22 CRAN (R 3.3.0)                                  
- memoise          1.1.0    2017-04-21 CRAN (R 3.3.2)                                  
- methods        * 3.3.2    2016-10-31 local                                           
- mime             0.5      2016-07-07 cran (@0.5)                                     
- munsell          0.4.3    2016-02-13 CRAN (R 3.3.0)                                  
- openxlsx       * 4.0.17   2017-03-23 CRAN (R 3.3.2)                                  
- pkgconfig        2.0.1    2017-03-21 CRAN (R 3.3.2)                                  
- plyr             1.8.4    2016-06-08 CRAN (R 3.3.0)                                  
- R6               2.2.2    2017-06-17 CRAN (R 3.3.2)                                  
- Rcpp             0.12.12  2017-07-15 CRAN (R 3.3.2)                                  
- RCurl            1.95-4.8 2016-03-01 CRAN (R 3.3.0)                                  
- rjson            0.2.15   2014-11-03 CRAN (R 3.3.0)                                  
- rlang            0.1.1    2017-05-18 CRAN (R 3.3.2)                                  
- scales           0.4.1    2016-11-09 CRAN (R 3.3.2)                                  
- shiny          * 1.0.3    2017-04-26 CRAN (R 3.3.2)                                  
- shinyBS        * 0.61     2015-03-31 CRAN (R 3.3.0)                                  
- shinydashboard * 0.6.1    2017-06-14 CRAN (R 3.3.2)                                  
- stats          * 3.3.2    2016-10-31 local                                           
- synapseClient  * 1.15-0   2017-05-25 Github (Sage-Bionetworks/rSynapseClient@2be9324)
- tibble           1.3.3    2017-05-28 CRAN (R 3.3.2)                                  
- tidyr          * 0.6.3    2017-05-15 CRAN (R 3.3.2)                                  
- tools            3.3.2    2016-10-31 local                                           
- utils          * 3.3.2    2016-10-31 local                                           
- withr            1.0.2    2016-06-20 CRAN (R 3.3.0)                                  
- xtable           1.8-2    2016-02-05 CRAN (R 3.3.0)   
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] bindrcpp_0.2         synapseClient_1.15-3 shinyBS_0.61         devtools_1.13.4     
+ [5] DT_0.2               data.table_1.10.4-3  jsonlite_1.5         shinydashboard_0.6.1
+ [9] openxlsx_4.0.17      ggplot2_2.2.1        tidyr_0.7.2          dplyr_0.7.4         
+[13] shiny_1.0.5         
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.14     compiler_3.4.3   plyr_1.8.4       bindr_0.1        bitops_1.0-6    
+ [6] tools_3.4.3      digest_0.6.13    memoise_1.1.0    tibble_1.3.4     gtable_0.2.0    
+[11] pkgconfig_2.0.1  rlang_0.1.4      yaml_2.1.16      withr_2.1.0      htmlwidgets_0.9 
+[16] grid_3.4.3       glue_1.2.0       R6_2.2.2         purrr_0.2.4      magrittr_1.5    
+[21] scales_0.5.0     htmltools_0.3.6  assertthat_0.2.0 mime_0.5         xtable_1.8-2    
+[26] colorspace_1.3-2 httpuv_1.3.5     RCurl_1.95-4.8   lazyeval_0.2.1   munsell_0.4.3   
+[31] rjson_0.2.15`                    
+```
