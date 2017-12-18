@@ -104,14 +104,5 @@ other attached packages:
  [1] bindrcpp_0.2         synapseClient_1.15-3 shinyBS_0.61         devtools_1.13.4     
  [5] DT_0.2               data.table_1.10.4-3  jsonlite_1.5         shinydashboard_0.6.1
  [9] openxlsx_4.0.17      ggplot2_2.2.1        tidyr_0.7.2          dplyr_0.7.4         
-[13] shiny_1.0.5         
-
-loaded via a namespace (and not attached):
- [1] Rcpp_0.12.14     compiler_3.4.3   plyr_1.8.4       bindr_0.1        bitops_1.0-6    
- [6] tools_3.4.3      digest_0.6.13    memoise_1.1.0    tibble_1.3.4     gtable_0.2.0    
-[11] pkgconfig_2.0.1  rlang_0.1.4      yaml_2.1.16      withr_2.1.0      htmlwidgets_0.9 
-[16] grid_3.4.3       glue_1.2.0       R6_2.2.2         purrr_0.2.4      magrittr_1.5    
-[21] scales_0.5.0     htmltools_0.3.6  assertthat_0.2.0 mime_0.5         xtable_1.8-2    
-[26] colorspace_1.3-2 httpuv_1.3.5     RCurl_1.95-4.8   lazyeval_0.2.1   munsell_0.4.3   
-[31] rjson_0.2.15`                    
+[13] shiny_1.0.5                            
 ```
