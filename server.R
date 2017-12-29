@@ -29,7 +29,7 @@ server <- function(input, output, session) {
       }
     }
   })
- 
+  
   userData <- reactive({
     
     file <- input$userAnnot
@@ -40,7 +40,7 @@ server <- function(input, output, session) {
     # )
     
     user.project <- input$projectName
- 
+    
     # check if project name exists 
     # shiny::validate(
     #   need(user.project, "Please enter your module name. \n\n ")
@@ -144,11 +144,11 @@ server <- function(input, output, session) {
     }else{
       final.dat
     }
-
+    
   })
-
+  
   output$annotationTable <- DT::renderDataTable({
-   
+    
     if (!is.null(input$userAnnot)) {
       table <- userData()
     }else{
@@ -157,7 +157,6 @@ server <- function(input, output, session) {
     table
     
   },options = list(pageLength = 5, lengthMenu = c(5, 10, 50, 100, 1000), style = 'overflow-x: auto'), rownames = FALSE, server = FALSE, filter = "bottom") 
-                                                                                                                                  
   
   output$downloadSchema <- downloadHandler(
     filename <- function() {'annotations_manifest.xlsx'},
@@ -205,6 +204,37 @@ server <- function(input, output, session) {
     }
   )
   
+  output$keyDescription <- DT::renderDataTable({
+    
+    if (!is.null(input$userAnnot)) {
+      selected.table <- userData()
+    }else{
+      selected.table <- dataOut() 
+    }
+    
+    
+    # create the key description dataframes
+    key.description <- selected.table[,c("key", "description", "columnType", "module")]
+    key.description <- key.description[!duplicated(key.description),]
+    key.description <- key.description[order(key.description$module),]
+    key.description
+    
+  }) 
+  
+  output$valueDescription <- DT::renderDataTable({
+    
+    if (!is.null(input$userAnnot)) {
+      selected.table <- userData()
+    }else{
+      selected.table <- dataOut() 
+    }
+    
+    value.description <- selected.table[,c("key", "value", "valueDescription", "source", "module")]
+    value.description <- value.description[order(value.description$module),]
+    value.description
+    
+  }) 
+  
   output$downloadJSON <- downloadHandler(
     
     filename <- function() {'annotations.json'},
@@ -223,7 +253,7 @@ server <- function(input, output, session) {
         
         user.cols <- unique(user.table[input$annotationTable_rows_selected, 'key'])
         user.table <- user.table[which(user.table$key %in% user.cols), ]
-
+        
       }
       
       user.table <- as.data.frame(user.table, stringsAsFactors = F)
@@ -275,7 +305,7 @@ server <- function(input, output, session) {
       writeLines(all.modules.json, filename)
     }
   )
-    
+  
   # allow refresh to run locally without a server 
   # session$allowReconnect("force")
   
