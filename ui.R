@@ -9,7 +9,7 @@
 # Different web browsers (ex. Firefox, Chrome,…) read .html files and 
 # display it (idea is to be consistent and similar)
 #-------------------------------------------------------------
-shinyUI(fluidPage(theme = shinytheme("lumen"),
+shinyUI(fluidPage(theme = shinytheme("flatly"),
                   
                   titlePanel(paste0("Annotation UI ", release.version)),
                   
