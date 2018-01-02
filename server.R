@@ -219,7 +219,7 @@ server <- function(input, output, session) {
     key.description <- key.description[order(key.description$module),]
     key.description
     
-  }) 
+  }, rownames = FALSE)
   
   output$valueDescription <- DT::renderDataTable({
     
@@ -233,7 +233,7 @@ server <- function(input, output, session) {
     value.description <- value.description[order(value.description$module),]
     value.description
     
-  }) 
+  }, rownames = FALSE)
   
   output$downloadJSON <- downloadHandler(
     
