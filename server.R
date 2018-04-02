@@ -60,25 +60,13 @@ server <- function(input, output, session) {
     
     standard.sage.colnames <- c("description", "columnType", "maximumSize", "valueDescription", "source", "module")
     columns <- which(colnames(user.dat) %in% standard.sage.colnames)
+
+    # Keep key and value column first, then other Sage columns
+    user.dat <- user.dat[, c("key", "value", colnames(user.dat)[columns])]
     
-    if (length(columns) == 0) {
-      
-      # extract only key and value columns 
-      user.dat <- user.dat[,c("key", "value")]
-      user.dat <- user.dat[which(!user.dat == ""), ]
-      user.dat <- user.dat[rowSums(is.na(user.dat)) != 2, ]
-      
-    }
-    
-    if (length(columns) > 0) {
-      
-      # extract key, value, and standard sage columns
-      n <- length(c(c("key", "value"), columns))
-      user.dat <- user.dat[ ,c(c("key", "value"), columns)]
-      user.dat <- user.dat[which(!user.dat == ""),]
-      user.dat <- user.dat[rowSums(is.na(user.dat)) != n, ]
-      
-    }
+    # Remove rows with empty string in key column or NAs in all columns
+    user.dat <- user.dat[user.dat$key != "", ]
+    user.dat <- user.dat[rowSums(is.na(user.dat)) < ncol(user.dat), ]
     
     # extract complete cases of values or keys     
     value <- user.dat$value[!is.na(user.dat$value)]
