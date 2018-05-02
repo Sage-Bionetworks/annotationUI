@@ -144,7 +144,7 @@ server <- function(input, output, session) {
     }
     table
     
-  },options = list(pageLength = 10, lengthMenu = c(5, 10, 50, 100, 1000), style = 'overflow-x: auto'), rownames = FALSE, server = FALSE, filter = "bottom") 
+  },options = list(pageLength = 25, lengthMenu = c(10, 25, 50, 100, 1000), style = 'overflow-x: auto'), rownames = FALSE, server = FALSE, filter = "bottom") 
   
   output$downloadSchema <- downloadHandler(
     filename <- function() {'annotations_manifest.xlsx'},
