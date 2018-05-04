@@ -48,7 +48,6 @@ options(stringsAsFactors = FALSE)
 # by replacing the global dat variable
 # you may use this app using the standard schema but your own melted data 
 queryResult <- synTableQuery('select * from syn10242922')
-# dat <- as.data.frame(queryResult@values)
 dat <- queryResult$asDataFrame()[ ,-c(1,2)]
 print(head(dat))
 
