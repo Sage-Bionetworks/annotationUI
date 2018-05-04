@@ -144,7 +144,7 @@ server <- function(input, output, session) {
     }
     table
     
-  },options = list(pageLength = 25, lengthMenu = c(10, 25, 50, 100, 1000), style = 'overflow-x: auto'), rownames = FALSE, server = FALSE, filter = "bottom") 
+  }, options = list(pageLength = 10, lengthMenu = c(10, 25, 50, 100, 1000), style = 'overflow-x: auto'), rownames = FALSE, server = FALSE, filter = "bottom") 
   
   output$downloadSchema <- downloadHandler(
     filename <- function() {'annotations_manifest.xlsx'},
@@ -207,7 +207,7 @@ server <- function(input, output, session) {
     key.description <- key.description[order(key.description$module),]
     key.description
     
-  }, rownames = FALSE)
+  }, options = list(pageLength = 10, lengthMenu = c(10, 25, 50, 100, 1000), style = 'overflow-x: auto'), rownames = FALSE, server = FALSE, filter = "bottom")
   
   output$valueDescription <- DT::renderDataTable({
     
@@ -221,7 +221,7 @@ server <- function(input, output, session) {
     value.description <- value.description[order(value.description$module),]
     value.description
     
-  }, rownames = FALSE)
+  }, options = list(pageLength = 10, lengthMenu = c(10, 25, 50, 100, 1000), style = 'overflow-x: auto'), rownames = FALSE, server = FALSE, filter = "bottom")
   
   output$downloadJSON <- downloadHandler(
     
