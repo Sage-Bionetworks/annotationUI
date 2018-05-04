@@ -94,15 +94,40 @@ Given the list of dependencies below.
 #### Session info 
 ------------------------------------------------------------------------------------------
 ```R
-R version 3.4.3 (2017-11-30)
-Running under: macOS Sierra 10.12.6
+> sessionInfo()
+R version 3.4.1 (2017-06-30)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Ubuntu 16.04.3 LTS
+
+Matrix products: default
+BLAS: /usr/lib/libblas/libblas.so.3.6.0
+LAPACK: /usr/lib/lapack/liblapack.so.3.6.0
+
+locale:
+ [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C
+ [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8
+ [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8
+ [7] LC_PAPER=en_US.UTF-8       LC_NAME=C
+ [9] LC_ADDRESS=C               LC_TELEPHONE=C
+[11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C
 
 attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
+[1] stats     graphics  grDevices utils     datasets  methods   base
 
 other attached packages:
- [1] bindrcpp_0.2         synapseClient_1.15-3 shinyBS_0.61         devtools_1.13.4     
- [5] DT_0.2               data.table_1.10.4-3  jsonlite_1.5         shinydashboard_0.6.1
- [9] openxlsx_4.0.17      ggplot2_2.2.1        tidyr_0.7.2          dplyr_0.7.4         
-[13] shiny_1.0.5                            
+ [1] synapser_0.1.25       rjson_0.2.15          PythonEmbedInR_0.1.11
+ [4] R6_2.2.2              DT_0.4.5              data.table_1.10.4
+ [7] jsonlite_1.5          shinydashboard_0.6.1  openxlsx_4.0.17
+[10] ggplot2_2.2.1.9000    shinythemes_1.1.1     shinyBS_0.61
+[13] shiny_1.0.5           tidyr_0.8.0           dplyr_0.7.4
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_0.12.16      pillar_1.2.1      compiler_3.4.1    plyr_1.8.4
+ [5] bindr_0.1         tools_3.4.1       digest_0.6.15     tibble_1.4.2
+ [9] gtable_0.2.0      pkgconfig_2.0.1   rlang_0.2.0.9000  bindrcpp_0.2
+[13] withr_2.1.2       htmlwidgets_1.0   grid_3.4.1        glue_1.2.0
+[17] purrr_0.2.4       magrittr_1.5      codetools_0.2-15  scales_0.5.0.9000
+[21] htmltools_0.3.6   assertthat_0.2.0  mime_0.5          xtable_1.8-2
+[25] colorspace_1.3-2  httpuv_1.3.5      pack_0.1-1        lazyeval_0.2.1
+[29] munsell_0.4.3
 ```
