@@ -20,11 +20,8 @@ usePackage("jsonlite")
 usePackage("data.table")
 usePackage("DT")
 
-# source('http://depot.sagebase.org/CRAN.R')
-# pkgInstall("synapseClient")
-# or for R newer versions pull from git 
-library(devtools)
-# install_github('Sage-Bionetworks/rSynapseClient', ref='develop')
+
+# install.packages("synapser", repos=c("https://sage-bionetworks.github.io/ran", "http://cran.fhcrc.org"))
 # install_github("ebailey78/shinyBS")
 library(dplyr)
 library(tidyr)
@@ -33,17 +30,17 @@ library(shinyBS)
 library(shinythemes)
 library(openxlsx)
 library(jsonlite)
-library(synapseClient)
+library(synapser)
 library(shinydashboard)
 library(data.table)
 library(DT)
 # ----------------------------------------------------------------------
 # login to synapse 
-# syn.login('me@nowhere.com', 'secret', rememberMe = TRUE)
+# synLogin('me@nowhere.com', 'secret', rememberMe = TRUE)
 # or caching credentials can also be done from the command line client:
 # synapse login -u me@nowhere.com -p secret --rememberMe
 # ----------------------------------------------------------------------
-synapseLogin()
+synLogin()
 
 # ----------------------------------------------------------------------
 options(stringsAsFactors = FALSE)
@@ -51,7 +48,8 @@ options(stringsAsFactors = FALSE)
 # by replacing the global dat variable
 # you may use this app using the standard schema but your own melted data 
 queryResult <- synTableQuery('select * from syn10242922')
-dat <- as.data.frame(queryResult@values)
+# dat <- as.data.frame(queryResult@values)
+dat <- queryResult$asDataFrame()[ ,-c(1,2)]
 print(head(dat))
 
 categories <- lapply(unique(dat$module), function(x) {x})
@@ -63,5 +61,4 @@ names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "val
 dat <- dat %>% mutate_all(as.character)
 
 # Get release version from syanpe table annotations
-table <- synGet("syn10242922")
-release.version <- annotations(table)$annotationReleaseVersion
+release.version <- synGetAnnotations("syn10242922")$annotationReleaseVersion[[1]]
