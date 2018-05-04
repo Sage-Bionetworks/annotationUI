@@ -61,3 +61,4 @@ dat <- dat %>% mutate_all(as.character)
 
 # Get release version from syanpe table annotations
 release.version <- synGetAnnotations("syn10242922")$annotationReleaseVersion[[1]]
+print(session_info())
