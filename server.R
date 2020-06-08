@@ -158,9 +158,6 @@ server <- function(input, output, session) {
         user.table <- dataOut() 
       }
       
-      # add columns for synapse projects 
-      first.cols <- c("path", "parent", "name", "used", "executed")
-      
       # extract a unique key to define the manifest columns
       if (length(input$annotationTable_rows_selected)) {
         
@@ -173,22 +170,16 @@ server <- function(input, output, session) {
       }
       
       # create the manifest schema 
-      columns <- append(c("path", "parent", "name", "used", "executed"), user.cols)
-      schema <- data.frame(matrix(ncol = length(columns), nrow = 0))
-      colnames(schema) <- columns
+      schema <- generate_manifest_template(user.cols)
       
       # create the key and key-value description dataframes
-      key.description <- user.table[,c("key", "description", "columnType", "module")]
-      key.description <- key.description[!duplicated(key.description),]
-      key.description <- key.description[order(key.description$module),]
-      value.description <- user.table[,c("key", "value", "valueDescription", "source", "module")]
-      value.description <- value.description[order(value.description$module),]
+      key.description <- generate_key_description(user.table)
+      value.description <- generate_value_description(user.table)
       # create three sheets including: 
-      #     1. manifest columns 
-      #     2. key descriptions 
+      #     1. manifest columns       #     2. key descriptions 
       #     3. value descriptions (key-value)
       sheets <- list(manifest = schema , keyDescription = key.description, keyValueDescription = value.description)
-      openxlsx::write.xlsx(sheets, filename)
+      write_manifest(sheets, filename)
     }
   )
   
@@ -202,9 +193,7 @@ server <- function(input, output, session) {
     
     
     # create the key description dataframes
-    key.description <- selected.table[,c("key", "description", "columnType", "module")]
-    key.description <- key.description[!duplicated(key.description),]
-    key.description <- key.description[order(key.description$module),]
+    key.description <- generate_key_description(selected.table)
     key.description
     
   }, options = list(pageLength = 10, lengthMenu = c(10, 25, 50, 100, 1000), style = 'overflow-x: auto'), rownames = FALSE, server = FALSE, filter = "bottom")
@@ -217,8 +206,7 @@ server <- function(input, output, session) {
       selected.table <- dataOut() 
     }
     
-    value.description <- selected.table[,c("key", "value", "valueDescription", "source", "module")]
-    value.description <- value.description[order(value.description$module),]
+    value.description <- generate_value_description(selected.table)
     value.description
     
   }, options = list(pageLength = 10, lengthMenu = c(10, 25, 50, 100, 1000), style = 'overflow-x: auto'), rownames = FALSE, server = FALSE, filter = "bottom")

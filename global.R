@@ -2,38 +2,32 @@
 # Simple Shiny template for annotations utils 
 # search, select, merge and download prototype 
 # ------------------------------------------------------------------------------
-usePackage <- function(p) 
-{
-  if (!is.element(p, installed.packages()[,1]))
-    install.packages(p, dep = TRUE)
-  require(p, character.only = TRUE)
+usePackage <- function(p, github, repos = getOption("repos"), ...) {
+  if (!missing(github)) {
+    ## Install from github -- devtools::install_github will automatically skip
+    ## if SHA of most recent commit matches what's installed already
+    devtools::install_github(paste(github, p, sep = "/"), ...)
+  }
+  if (!is.element(p, installed.packages()[,1])) {
+    install.packages(p, repos = repos, dependencies = TRUE)
+  }
+  library(p, character.only = TRUE)
 }
+
+usePackage("devtools")
 usePackage("dplyr")
 usePackage("tidyr")
 usePackage("shiny")
-usePackage("shinyBS")
+usePackage("shinyBS", github = "ebailey78")
 usePackage("shinythemes")
 usePackage("ggplot2")
-usePackage("openxlsx")
 usePackage("shinydashboard")
 usePackage("jsonlite")
 usePackage("data.table")
 usePackage("DT")
+usePackage("syndccutils", github = "Sage-Bionetworks", subdir = "R")
+usePackage("synapser", repos = "https://sage-bionetworks.github.io/ran")
 
-
-# install.packages("synapser", repos=c("https://sage-bionetworks.github.io/ran", "http://cran.fhcrc.org"))
-# install_github("ebailey78/shinyBS")
-library(dplyr)
-library(tidyr)
-library(shiny)
-library(shinyBS)
-library(shinythemes)
-library(openxlsx)
-library(jsonlite)
-library(synapser)
-library(shinydashboard)
-library(data.table)
-library(DT)
 # ----------------------------------------------------------------------
 # login to synapse 
 # synLogin('me@nowhere.com', 'secret', rememberMe = TRUE)
@@ -47,16 +41,13 @@ options(stringsAsFactors = FALSE)
 
 # by replacing the global dat variable
 # you may use this app using the standard schema but your own melted data 
-queryResult <- synTableQuery('select * from syn10242922')
-dat <- queryResult$asDataFrame()[ ,-c(1,2)]
+dat <- get_synapse_annotations()
 print(head(dat))
 
 categories <- lapply(unique(dat$module), function(x) {x})
 key <- unique(dat$key)
 value <- unique(dat$value)
 
-all.vars <- names(dat)
-names(dat) <- c("key", "description", "columnType", "maximumSize", "value", "valueDescription", "source", "module")
 dat <- dat %>% mutate_all(as.character)
 
 # Get release version from syanpe table annotations
